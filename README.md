@@ -6,7 +6,7 @@
   (insert "#!/usr/bin/python\n#-*-coding:utf-8 -*-\n")
   )
 ```
-* lambda
+* lambda [多行的lambda使用](./python_lambda_multiline.py)
 ```py
 add = lambda a,b : a + b
 print add(2,3)
