@@ -26,6 +26,7 @@ for i in range(len(abc)):
 * reduce
 ```py
 reduce(lambda a,b : a + b,[2,3,4]) #=> 9
+reduce(lambda a,b: a+b, [1,2,3,4], 100) #=> 110
 ```
 * filter
 ```py
