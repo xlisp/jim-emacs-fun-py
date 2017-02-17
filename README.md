@@ -1,4 +1,4 @@
-### jim-emacs-fun-py
+### jim-emacs-fun-py python函数式的列表(如果必要的化引入流行的函数式的库)
 * `M-x py-utf-8`
 ```emacs-lisp
 (defun py-utf-8 ()
@@ -10,6 +10,8 @@
 ```py
 add = lambda a,b : a + b
 print add(2,3)
+# or 
+(lambda a,b : a + b)(2,3)
 ```
 * map
 ```py
