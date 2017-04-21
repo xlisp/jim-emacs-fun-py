@@ -33,6 +33,14 @@ reduce(lambda a,b: a+b, [1,2,3,4], 100) #=> 110
 * filter
 ```py
 filter(lambda x: x>0, [2, -5, 9, -7, 2, 5, 4, -1, 0, -3, 8]) #=> [2, 9, 2, 5, 4, 8]
+# => or 方法必须要return布尔值
+def myfn(x):
+    if x > 0:
+        return True
+    else:
+        return False
+
+filter(lambda x: myfn(x), [2, -5, 9, -7, 2, 5, 4, -1, 0, -3, 8]) #=> [2, 9, 2, 5, 4, 8]
 ```
 * yield
 ```py
