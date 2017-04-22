@@ -52,8 +52,6 @@ ooo = []
 for va in vaAAs:
     ooo = va + ooo
 
-ooo #=> ['pi-3', 'pi-6', 'pk-8', 'pk-22', 'pk-31', 'pr-5', 'pr-8', 'pr-9', 'pr-3']
-
 ```
 * filter
 ```py
