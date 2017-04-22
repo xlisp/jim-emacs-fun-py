@@ -100,3 +100,7 @@ def abc(a, b):
     print a, b
 functools.partial(abc, 111)(222) #=> 111 222
 ```
+* apply 
+```py
+apply(lambda a,b: a+b, [1, 2]) #=> 3
+```
