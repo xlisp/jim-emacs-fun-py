@@ -103,4 +103,5 @@ functools.partial(abc, 111)(222) #=> 111 222
 * apply 
 ```py
 apply(lambda a,b: a+b, [1, 2]) #=> 3
+apply(lambda a, b, c, d: a + b + c + d, [[1], [2], [3], [5, 6, 7]]) #=> [1, 2, 3, 5, 6, 7]
 ```
