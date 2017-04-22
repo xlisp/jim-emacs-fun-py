@@ -24,6 +24,20 @@ list(len(s) for s in ['sentence', 'fragment']) #=> [8, 8]
 abc = ['aaa','faag','stevech']
 for i in range(len(abc)):
     print len(abc[i])
+
+#====> enumerate 是取key和index
+for index, key in enumerate({'aaa' : 1111, 'bbb' : 222}):
+    print key, index
+# aaa 0
+# bbb 1    
+
+#====> iteritems 是取key和val
+# For Python 3.x: for key, val in d.items():
+for key, val in {'aaa' : 1111, 'bbb' : 222}.iteritems():
+    print key, val
+#  aaa 1111
+#  bbb 222
+
 ```
 * reduce
 ```py
