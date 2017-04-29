@@ -105,3 +105,16 @@ functools.partial(abc, 111)(222) #=> 111 222
 apply(lambda a,b: a+b, [1, 2]) #=> 3
 apply(lambda a, b, c, d: a + b + c + d, [[1], [2], [3], [5, 6, 7]]) #=> [1, 2, 3, 5, 6, 7]
 ```
+* Math Combinatorics: cartesian product
+
+```py
+import itertools
+somelists = [
+    [1, 2, 3],
+    ['a', 'b'],
+    [4, 5]
+]
+
+[element for element in itertools.product(*somelists)] # 12种组合
+#=> [(1, 'a', 4), (1, 'a', 5), (1, 'b', 4) ... ]
+```
