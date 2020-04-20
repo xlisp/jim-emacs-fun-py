@@ -22,6 +22,7 @@
 ## 相关资源
 ### [JavaScript函数式的列表](https://github.com/chanshunli/jim-emacs-fun-es6)
 ### [Functional CSS的列表](https://github.com/chanshunli/jim-emacs-fun-tachyons-flex-css)
+### [R function programming list](https://github.com/chanshunli/jim-emacs-fun-r-lisp)
 
 ## `M-x py-utf-8`
 ```emacs-lisp
