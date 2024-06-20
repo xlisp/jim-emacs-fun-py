@@ -1,4 +1,4 @@
-# Python函数式的列表与Lambda演算
+# Python函数式的列表与Lambda演算以及Lisp化快速反馈开发
 
 * 如果必要的化引入流行的函数式的库, 或者先用hylang或者libpython-clj来编写,然后GPT翻译python
 * 加入Emacs编写各种辅助开发Python体验如Lisp的Elisp
@@ -10,7 +10,7 @@
 
 ---
 
-- [jim-emacs-fun-py Python函数式的列表(如果必要的化引入流行的函数式的库, 或者先用hylang或者libpython-clj来编写,然后GPT翻译python; 加入Emacs编写各种辅助开发Python体验如Lisp的Elisp)](#jim-emacs-fun-py-python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%88%97%E8%A1%A8%E5%A6%82%E6%9E%9C%E5%BF%85%E8%A6%81%E7%9A%84%E5%8C%96%E5%BC%95%E5%85%A5%E6%B5%81%E8%A1%8C%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%BA%93-%E6%88%96%E8%80%85%E5%85%88%E7%94%A8hylang%E6%88%96%E8%80%85libpython-clj%E6%9D%A5%E7%BC%96%E5%86%99%E7%84%B6%E5%90%8Egpt%E7%BF%BB%E8%AF%91python-%E5%8A%A0%E5%85%A5emacs%E7%BC%96%E5%86%99%E5%90%84%E7%A7%8D%E8%BE%85%E5%8A%A9%E5%BC%80%E5%8F%91python%E4%BD%93%E9%AA%8C%E5%A6%82lisp%E7%9A%84elisp)
+- [Python函数式的列表与Lambda演算以及Lisp化快速反馈开发](#python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%88%97%E8%A1%A8%E4%B8%8Elambda%E6%BC%94%E7%AE%97%E4%BB%A5%E5%8F%8Alisp%E5%8C%96%E5%BF%AB%E9%80%9F%E5%8F%8D%E9%A6%88%E5%BC%80%E5%8F%91)
   - [相关资源](#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%BA%90)
   - [解决import的问题](#%E8%A7%A3%E5%86%B3import%E7%9A%84%E9%97%AE%E9%A2%98)
   - [解决抄Py效率](#%E8%A7%A3%E5%86%B3%E6%8A%84py%E6%95%88%E7%8E%87)
@@ -29,6 +29,7 @@
   - [apply](#apply)
   - [Math Combinatorics: cartesian product](#math-combinatorics-cartesian-product)
   - [clojure for in py](#clojure-for-in-py)
+
 
 ## 相关资源
 * [JavaScript函数式的列表](https://github.com/chanshunli/jim-emacs-fun-es6)
