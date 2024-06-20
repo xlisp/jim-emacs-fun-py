@@ -277,3 +277,16 @@ somelists = [
 ;; => ([1 "a" 4] [1 "a" 5] [1 "b" 4] [1 "b" 5] [2 "a" 4] [2 "a" 5] [2 "b" 4] [2 "b" 5] [3 "a" 4] [3 "a" 5] [3 "b" 4] [3 "b" 5])
 
 ```
+
+## test_就是最好的纯函数化的东西
+
+```python
+# $ pytest
+# content of test_sample.py
+def func(x):
+    return x + 1
+
+def test_answer():
+    assert func(3) == 5
+```
+
