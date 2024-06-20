@@ -1,5 +1,14 @@
-# jim-emacs-fun-py Python函数式的列表(如果必要的化引入流行的函数式的库, 或者先用hylang或者libpython-clj来编写,然后GPT翻译python; 加入Emacs编写各种辅助开发Python体验如Lisp的Elisp)
+# Python函数式的列表与Lambda演算
 
+* 如果必要的化引入流行的函数式的库, 或者先用hylang或者libpython-clj来编写,然后GPT翻译python
+* 加入Emacs编写各种辅助开发Python体验如Lisp的Elisp
+
+- [x] Emacs集成Python的代码语义搜索
+- [ ] Emacs支持GPT从注释输出到函数，以及选中函数翻译目标代码
+- [ ] Emacs支持Py的测试自动化开发: 基于xonsh的实现
+- [ ] 可以跳转代码，以及搜索所有跳转打开的buffer
+
+---
 
 - [jim-emacs-fun-py Python函数式的列表(如果必要的化引入流行的函数式的库, 或者先用hylang或者libpython-clj来编写,然后GPT翻译python; 加入Emacs编写各种辅助开发Python体验如Lisp的Elisp)](#jim-emacs-fun-py-python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%88%97%E8%A1%A8%E5%A6%82%E6%9E%9C%E5%BF%85%E8%A6%81%E7%9A%84%E5%8C%96%E5%BC%95%E5%85%A5%E6%B5%81%E8%A1%8C%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%BA%93-%E6%88%96%E8%80%85%E5%85%88%E7%94%A8hylang%E6%88%96%E8%80%85libpython-clj%E6%9D%A5%E7%BC%96%E5%86%99%E7%84%B6%E5%90%8Egpt%E7%BF%BB%E8%AF%91python-%E5%8A%A0%E5%85%A5emacs%E7%BC%96%E5%86%99%E5%90%84%E7%A7%8D%E8%BE%85%E5%8A%A9%E5%BC%80%E5%8F%91python%E4%BD%93%E9%AA%8C%E5%A6%82lisp%E7%9A%84elisp)
   - [相关资源](#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%BA%90)
