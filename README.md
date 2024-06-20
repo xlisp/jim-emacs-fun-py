@@ -289,4 +289,12 @@ def func(x):
 def test_answer():
     assert func(3) == 5
 ```
+* https://github.com/apachecn/zetcode-zh/blob/master/docs/py/39.md
+```bash
+## 测试特定文件
+$ pytest  tests/test_min_max_test.py
 
+## 测试特定的函数
+$ pytest  tests/test_min_max_test.py::test_min
+
+```
