@@ -24,12 +24,123 @@
 ### [Functional CSS的列表](https://github.com/chanshunli/jim-emacs-fun-tachyons-flex-css)
 ### [R function programming list](https://github.com/chanshunli/jim-emacs-fun-r-lisp)
 
+## 解决import的问题：独立目录 + `sys.path.append('.')`
+```elisp
+(defun sys-path-py ()
+  (interactive)
+  (insert "
+import sys
+print(sys.path)
+print(f\"====Name: {__name__}\")
+print(f\"====Package: {__package__}\")
+"
+          )
+  )
+
+```
+## 解决抄Py效率
+
+```elisp
+(comment
+ (message "1111")
+ )
+(defun copy-py-file-by-import2 (start end) ;;=> OK
+  ;; (interactive)
+  (interactive "r")
+  (let* ((file (buffer-substring-no-properties start end))
+         (cmd (concat
+               "cp /Users/emacspy/Desktop/CxxxyyAIPro111/zzzyyy/zzzyyy/"
+               file
+               ".py"
+               " /Users/emacspy/Desktop/CxxxyyAIPro111/cxxxyy-ai-agent/agenthub/code_agent/")))
+    (message "------")
+    (message file)
+    (message "------")
+    (message cmd)
+    (shell-command-to-string cmd)))
+
+(defun grep-py-lib (start end)
+  (interactive "r")
+  (let* ((lib (buffer-substring-no-properties start end))
+         (cmd (concat  "cat /Users/emacspy/Desktop/CxxxyyAIPro111/zzzyyy/requirements.txt | grep " lib "| pbcopy"))
+         (res (shell-command-to-string cmd)))
+    (find-file "/Users/emacspy/Desktop/CxxxyyAIPro111/cxxxyy-ai-agent/pyproject.toml")
+    ;; TODO: go chat search march while , do gsub-py-content
+    ;; TODO: if no found search the lib in google & open requirements.txt
+    (with-current-buffer "pyproject.toml"
+      (goto-char (point-max)))
+    )
+  )
+
+(defun gsub-py-content (start end)
+  ;; TODO: 替换py内容
+  (interactive "r")
+  (let* ((lib (buffer-substring-no-properties start end))
+         (cmd (concat "---" lib)))
+    (message (shell-command-to-string cmd))
+    )
+  )
+
+```
+
+## Emacs 开发Elisp，Clojure类似的体验，构建快速纠错反馈循环 
+- [ ] 可支持发送函数，语法检查发送整个函数
+- [x] 发送行以及实现send-line-to-eshell
+- [ ] 发送整个文件`source file.py`，给eshell的ipython的debug 或者是xonsh 
+```elisp
+;; (+ 1 2) ;; M-x send-region-to-eshell is OK
+;; 1 + 2 ; Eshell start ipython is OK, sent code eval ok.
+;; TODO: send one line code to ipython
+;; TODO: for emacs buffer , send all file content to this eshell buffer
+(defun send-region-to-eshell (start end)
+  "Send the selected region to Eshell."
+  (interactive "r")
+  (let ((region (buffer-substring-no-properties start end)))
+    (with-current-buffer "*eshell*"
+      (goto-char (point-max))
+      (insert region)
+      (eshell-send-input))))
+
+;; Current GPT Question: in abc.el elisp edit buffer, how to send abc.el currrent line code elisp code to eshell buffer and eval it , and eshell buffer can scroll bottom, and last need cursor gocack abc.el current buffer.
+(global-set-key (kbd "C-c e") 'send-line-to-eshell)
+;; sid + '------'
+(defun send-line-to-eshell ()
+  "Take the current line, dispatch it to Eshell, and evaluate there."
+  (interactive)
+  (let ((code (buffer-substring (line-beginning-position) (line-end-position))))
+    (switch-to-buffer-other-window "*eshell*")
+    (goto-char (point-max))
+    (insert code)
+    (eshell-send-input)
+    (eshell-scroll-to-bottom)))
+
+;; can not goback
+(defun send-line-to-eshell-and-eval ()
+  "Send the current line from Emacs buffer to eshell, evaluate it, and return to the origin."
+  (interactive)
+  (let ((code (thing-at-point 'line t)))
+    ;; Open or switch to eshell buffer
+    (unless (get-buffer "*esh(ell*")
+      (eshell))
+    (switch-to-buffer "*eshell*")
+    ;; Send the code to eshell
+    (goto-char (point-max))
+    (insert code)
+    (eshell-send-input)
+    (eshell-scroll-to-bottom nil nil)
+    ;; Return to the original buffer and line
+    (switch-to-prev-buffer)
+    (back-to-indentation))))
+
+```
+
 ## `M-x py-utf-8`
 ```emacs-lisp
 (defun py-utf-8 ()
   (interactive)
   (insert "#!/usr/bin/python\n#-*-coding:utf-8 -*-\n")
   )
+
 ```
 ## lambda [多行的lambda使用](./python_lambda_multiline.py)
 ```py
