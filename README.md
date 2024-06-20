@@ -292,9 +292,9 @@ def test_answer():
 * https://github.com/apachecn/zetcode-zh/blob/master/docs/py/39.md
 ```bash
 ## 测试特定文件
-$ pytest  tests/test_min_max_test.py
+$ pytest  tests/test_min_max_test.py # TODO：Emacs 开发一个C-c C-k，找到对应的测试文件是谁
 
-## 测试特定的函数
+## 测试特定的函数 => TODO: Emacs开发一个插件，向上寻找当前函数名，C-c C-c发送给执行文件, 用ast的库实现.
 $ pytest  tests/test_min_max_test.py::test_min
 
 ```
