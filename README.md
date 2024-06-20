@@ -1,9 +1,11 @@
-# jim-emacs-fun-py python函数式的列表(如果必要的化引入流行的函数式的库, 或者先用hylang来编写,然后编译为python)
+# jim-emacs-fun-py Python函数式的列表(如果必要的化引入流行的函数式的库, 或者先用hylang或者libpython-clj来编写,然后GPT翻译python; 加入Emacs编写各种辅助开发Python体验如Lisp的Elisp)
 
-- [jim-emacs-fun-py python函数式的列表(如果必要的化引入流行的函数式的库, 或者先用hylang来编写,然后编译为python)](#jim-emacs-fun-py-python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%88%97%E8%A1%A8%E5%A6%82%E6%9E%9C%E5%BF%85%E8%A6%81%E7%9A%84%E5%8C%96%E5%BC%95%E5%85%A5%E6%B5%81%E8%A1%8C%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%BA%93-%E6%88%96%E8%80%85%E5%85%88%E7%94%A8hylang%E6%9D%A5%E7%BC%96%E5%86%99%E7%84%B6%E5%90%8E%E7%BC%96%E8%AF%91%E4%B8%BApython)
+
+- [jim-emacs-fun-py Python函数式的列表(如果必要的化引入流行的函数式的库, 或者先用hylang或者libpython-clj来编写,然后GPT翻译python; 加入Emacs编写各种辅助开发Python体验如Lisp的Elisp)](#jim-emacs-fun-py-python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%88%97%E8%A1%A8%E5%A6%82%E6%9E%9C%E5%BF%85%E8%A6%81%E7%9A%84%E5%8C%96%E5%BC%95%E5%85%A5%E6%B5%81%E8%A1%8C%E7%9A%84%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%BA%93-%E6%88%96%E8%80%85%E5%85%88%E7%94%A8hylang%E6%88%96%E8%80%85libpython-clj%E6%9D%A5%E7%BC%96%E5%86%99%E7%84%B6%E5%90%8Egpt%E7%BF%BB%E8%AF%91python-%E5%8A%A0%E5%85%A5emacs%E7%BC%96%E5%86%99%E5%90%84%E7%A7%8D%E8%BE%85%E5%8A%A9%E5%BC%80%E5%8F%91python%E4%BD%93%E9%AA%8C%E5%A6%82lisp%E7%9A%84elisp)
   - [相关资源](#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%BA%90)
-    - [JavaScript函数式的列表](#javascript%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%88%97%E8%A1%A8)
-    - [Functional CSS的列表](#functional-css%E7%9A%84%E5%88%97%E8%A1%A8)
+  - [解决import的问题](#%E8%A7%A3%E5%86%B3import%E7%9A%84%E9%97%AE%E9%A2%98)
+  - [解决抄Py效率](#%E8%A7%A3%E5%86%B3%E6%8A%84py%E6%95%88%E7%8E%87)
+  - [Emacs 开发Elisp，Clojure类似的体验，构建快速纠错反馈循环](#emacs-%E5%BC%80%E5%8F%91elispclojure%E7%B1%BB%E4%BC%BC%E7%9A%84%E4%BD%93%E9%AA%8C%E6%9E%84%E5%BB%BA%E5%BF%AB%E9%80%9F%E7%BA%A0%E9%94%99%E5%8F%8D%E9%A6%88%E5%BE%AA%E7%8E%AF)
   - [`M-x py-utf-8`](#m-x-py-utf-8)
   - [lambda 多行的lambda使用](#lambda-%E5%A4%9A%E8%A1%8C%E7%9A%84lambda%E4%BD%BF%E7%94%A8)
   - [map](#map)
@@ -20,11 +22,12 @@
   - [clojure for in py](#clojure-for-in-py)
 
 ## 相关资源
-### [JavaScript函数式的列表](https://github.com/chanshunli/jim-emacs-fun-es6)
-### [Functional CSS的列表](https://github.com/chanshunli/jim-emacs-fun-tachyons-flex-css)
-### [R function programming list](https://github.com/chanshunli/jim-emacs-fun-r-lisp)
+* [JavaScript函数式的列表](https://github.com/chanshunli/jim-emacs-fun-es6)
+* [Functional CSS的列表](https://github.com/chanshunli/jim-emacs-fun-tachyons-flex-css)
+* [R function programming list](https://github.com/chanshunli/jim-emacs-fun-r-lisp)
 
-## 解决import的问题：独立目录 + `sys.path.append('.')`
+## 解决import的问题
+*  独立目录 + `sys.path.append('.')`
 ```elisp
 (defun sys-path-py ()
   (interactive)
@@ -33,17 +36,13 @@ import sys
 print(sys.path)
 print(f\"====Name: {__name__}\")
 print(f\"====Package: {__package__}\")
-"
-          )
-  )
-
+"))
 ```
 ## 解决抄Py效率
 
 ```elisp
 (comment
- (message "1111")
- )
+ (message "1111"))
 (defun copy-py-file-by-import2 (start end) ;;=> OK
   ;; (interactive)
   (interactive "r")
