@@ -15,7 +15,7 @@
     ("php" . "/usr/bin/php")
     ("pl" . "/usr/bin/perl")
     ("java" . "/usr/bin/javac")
-    ("py" . "/anaconda3/bin/python")
+    ("py" . "/opt/anaconda3/bin/python")
     ("ex" . "/usr/local/bin/elixir")
     ("exs" . "/usr/local/bin/elixir")))
 
