@@ -313,7 +313,30 @@ $ pytest  tests/test_min_max_test.py::test_min
 Hello
 World
 坚持去λ化(中-易) ~  @
-
+```
+* Event loops
+```python
+import asyncio
+async def my_coroutine():
+    print('Coroutine started')
+    await asyncio.sleep(1)
+    print('Coroutine finished')
+loop = asyncio.get_event_loop()
+loop.run_until_complete(my_coroutine())
+loop.close()
+# Coroutine started
+# Coroutine finished
+```
+* Task
+```python
+async def my_coroutine():
+    print('Coroutine started')
+    await asyncio.sleep(1)
+    print('Coroutine finished')
+async def main():
+    task = asyncio.create_task(my_coroutine())
+    await task
+asyncio.run(main())
 ```
 * https://www.cnblogs.com/yoyoketang/p/16256696.html Old version
 ```bash
