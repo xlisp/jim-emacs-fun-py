@@ -303,7 +303,12 @@ $ pytest  tests/test_min_max_test.py::test_min
 ```
 
 ## Python async await
+* ^^ 原则：发现是一个阻塞操作, 就新建一个async协程对象, 当队列来处理，然后队列里面需要做一个'callback'操作队列的单个元素-处理队的操作  ^^
 * https://martinxpn.medium.com/async-await-in-python-asyncio-deep-dive-76-100-days-of-python-31b44cb28d82
+*  如果一个函数有阻塞操作，如time.sleep(1) , 就需要头部加上`async def xxx`, 然后阻塞的地方加上`await time.sleep` or `await litellm.acompletion(..)`
+*  如果函数里面还有多个的阻塞操作：也需要新建一个async协程对象 `async with aiohttp.ClientSession()`, 然后await其结果`await fetch_html(session, url)`
+*  或者是一个"流队列对象"，也可以新建一个async协程对象`async for chunk in llm_response:`, 然后await其结果`await ws_send_msg(word)`
+*  async协程对象对象里面可以包含async，是递归的，但async里面都至少包含一个对象的处理await‘callback’处理队的操作
 ```python
 坚持去λ化(中-易) ~  @ async def hello_world():
 .....................     print('Hello')
