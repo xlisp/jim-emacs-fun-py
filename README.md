@@ -29,7 +29,10 @@
   - [apply](#apply)
   - [Math Combinatorics: cartesian product](#math-combinatorics-cartesian-product)
   - [clojure for in py](#clojure-for-in-py)
-
+  - [test_就是最好的纯函数化的东西](#test_%E5%B0%B1%E6%98%AF%E6%9C%80%E5%A5%BD%E7%9A%84%E7%BA%AF%E5%87%BD%E6%95%B0%E5%8C%96%E7%9A%84%E4%B8%9C%E8%A5%BF)
+  - [Python async await](#python-async-await)
+  - [Python单文件执行快速验证概念](#python%E5%8D%95%E6%96%87%E4%BB%B6%E6%89%A7%E8%A1%8C%E5%BF%AB%E9%80%9F%E9%AA%8C%E8%AF%81%E6%A6%82%E5%BF%B5)
+  - [Python remote repl for debug不要在线上编程](#python-remote-repl-for-debug%E4%B8%8D%E8%A6%81%E5%9C%A8%E7%BA%BF%E4%B8%8A%E7%BC%96%E7%A8%8B)
 
 ## 相关资源
 * [JavaScript函数式的列表](https://github.com/chanshunli/jim-emacs-fun-es6)
