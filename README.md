@@ -298,3 +298,24 @@ $ pytest  tests/test_min_max_test.py # TODO：Emacs 开发一个C-c C-k，找到
 $ pytest  tests/test_min_max_test.py::test_min
 
 ```
+
+## Python async await
+
+```python
+# TODO
+
+```
+
+## Python单文件执行快速验证概念
+
+```elisp
+# jim-eval-buffer.el
+
+```
+
+## Python remote repl for debug不要在线上编程
+
+```elisp
+# TODO: kungfu_todo_for_ipython.el 改成IPython的版本 
+
+```
