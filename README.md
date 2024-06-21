@@ -347,13 +347,34 @@ python await_test.py
 ## Python单文件执行快速验证概念
 
 ```elisp
-# jim-eval-buffer.el
-
+;; jim-eval-buffer.el
+(defun jw-eval-buffer ()
+  "Evaluate the current buffer and display the result in a buffer."
+  (interactive)
+  (save-buffer)
+  (let* ((file-name (buffer-file-name (current-buffer)))
+         (file-extension (file-name-extension file-name))
+         (buffer-eval-command-pair (assoc file-extension jw-eval-buffer-commands)))
+    (if buffer-eval-command-pair
+        (let ((command (concat (cdr buffer-eval-command-pair) " " file-name)))
+          (shell-command-on-region (point-min) (point-max) command jw-eval-buffer-name nil)
+          (pop-to-buffer jw-eval-buffer-name)
+          (other-window 1)
+          (jw-eval-buffer-pretty-up-errors jw-eval-buffer-name)
+          (message ".."))
+      (message "Unknown buffer type"))))
 ```
 
 ## Python remote repl for debug不要在线上编程
 
 ```elisp
-# TODO: kungfu_todo_for_ipython.el 改成IPython的版本 
-
+;; TODO: kungfu_todo_for_ipython.el 改成IPython的版本 
+(defun drb-shell (cmd fn &rest args)
+  (let* ((args
+	  (if (null args) ""
+	    (concat " '" (reduce (lambda (s i) (concat s "' '" i)) args) "' ") ))
+	 (cmd-str
+	  (concat "drb" kungfu-path
+		  "/drb-help/" cmd ".drb " args)))
+    (funcall fn (shell-command-to-string cmd-str))))
 ```
