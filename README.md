@@ -309,6 +309,7 @@ $ pytest  tests/test_min_max_test.py::test_min
 *  如果一个函数有阻塞操作，如time.sleep(1) , 就需要头部加上`async def xxx`, 然后阻塞的地方加上`await asyncio.sleep` or `await litellm.acompletion(..)` 
 *  如果函数里面还有多个的阻塞操作：也需要新建一个async协程对象 `async with aiohttp.ClientSession()`, 然后await其结果`await fetch_html(session, url)`
 *  或者是一个"流队列对象"，也可以新建一个async协程对象`async for chunk in llm_response:`, 然后await其结果`await ws_send_msg(word)`
+* await 只能在async函数里面去使用：`SyntaxError: 'await' outside async function`, 而且只能await调用coroutine对象或者是async函数
 ```python
 坚持去λ化(中-易) ~  @ async def hello_world():
 .....................     print('Hello')

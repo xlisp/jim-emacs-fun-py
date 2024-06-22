@@ -50,3 +50,12 @@ async def main():
 
 # Run the main function
 asyncio.run(main())
+
+# SyntaxError: 'await' outside function , 
+#a = await log_scribe()  # Call the scribe to start the play
+#b = await log_listener(a)  # Listener joins without delay
+
+# SyntaxError: 'await' outside async function
+#def abc():
+#    await log_scribe()
+
