@@ -1,0 +1,14 @@
+{:paths     ["src"]
+ :mvn/repos {"my.datomic.com" {:url "https://my.datomic.com/repo"}}
+ :deps
+ {clj-http                       {:mvn/version "3.10.0"}
+  cheshire                       {:mvn/version "5.8.1"}
+  nrepl                          {:mvn/version "0.8.3"}
+  cider/cider-nrepl              {:mvn/version "0.21.1"}
+  org.clojure/clojure            {:mvn/version "1.10.3"}
+  clj-python/libpython-clj 		 {:mvn/version "2.025"}
+  org.clojure/clojurescript      {:mvn/version "1.10.879"}
+  org.clojure/core.async         {:mvn/version "0.4.500"}
+  com.datomic/datomic-pro        {:mvn/version "1.0.6165"}
+  com.datomic/client-pro         {:mvn/version "0.9.57"}
+  datascript                     {:mvn/version "1.2.8"}}}
