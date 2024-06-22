@@ -13,6 +13,7 @@ from typing import TypedDict, Annotated, Sequence
 from langchain_core.messages import BaseMessage, FunctionMessage, HumanMessage
 import operator
 
+
 # Define the tools for the agent to use
 tools = [TavilySearchResults(max_results=1)]
 tool_node = ToolNode(tools)
@@ -44,7 +45,8 @@ def call_model(state: AgentState):
 # Define a new graph
 workflow = StateGraph(MessagesState)
 
-# Define the two nodes we will cycle between
+# Define the two nodes we will cycle between : 定义一个有向无环图，就像Graphviz一样，无环在于不会反复执行一个节点。
+# => 提供一个DSL，不需要关心底层的实现，就可以快速定义一个有向无环图的状态实现。=> Ruby 可以实现更好的DSL相比于Python实现的DSL
 workflow.add_node("agent", call_model)
 workflow.add_node("tools", tool_node)
 
@@ -52,7 +54,7 @@ workflow.add_node("tools", tool_node)
 # This means that this node is the first one called
 workflow.set_entry_point("agent")
 
-# We now add a conditional edge
+# We now add a conditional edge ：有向无环图条件执行的边。
 workflow.add_conditional_edges(
     # First, we define the start node. We use `agent`.
     # This means these are the edges taken after the `agent` node is called.
@@ -80,6 +82,4 @@ final_state = app.invoke(
     config={"configurable": {"thread_id": 42}}
 )
 print(final_state["messages"][-1].content) => 'The weather in San Francisco is currently 57°F and sunny. If you would like more detailed information, you can visit [this link](https://www.wunderground.com/hourly/us/ca/san-francisco/94119/date/2024-6-22).'
-
-
 
