@@ -1,3 +1,4 @@
 *.pyc
 .cpcache/
 .nrepl-port
+.ipynb_checkpoints/
