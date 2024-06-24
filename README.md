@@ -497,3 +497,16 @@ print(asyncio.run(test_get_response("hi")))
 		  "/drb-help/" cmd ".drb " args)))
     (funcall fn (shell-command-to-string cmd-str))))
 ```
+
+## Emacs yasnippet帮助快速写脚手架代码, 算法脚手架
+
+```elisp
+(yas-define-snippets
+ 'python-mode
+ '(("def" "def ${1:function_name}(${2:args}):\n    $0" "Python function")
+   ("def" "def ${1:function_name}(${2:args}):\n    \"\"\"${3:Docstring for ${1}}\"\"\"\n    ${0:# TODO: ${1}}" "Python function with same variable in multiple places")
+   ;; press tab will jump to next point for edit
+   ("async" "async def ${1:function_name}(${2:args}):\n    ${0:# TODO: }\n\n${3:python-function}\n\nawait ${1}(${2})" "async await") ;; $0是最后回到的点。
+   ))
+```
+
