@@ -510,3 +510,13 @@ print(asyncio.run(test_get_response("hi")))
    ))
 ```
 
+## Python lambda演算
+* Lisp 元编程 =》 Ruby 元编程 =》Python是Ruby的阉割版 。用Elisp来生成Python！用Clojure/Elisp/Ruby来学习转移帮助Python代码生成测试开发
+
+```ruby
+puts -> {
+  # Ruby lambda快速演算 => TODO Python
+  add = -> a { a + 1}
+  add[100] #=> 101
+}[]
+```
