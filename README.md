@@ -33,6 +33,8 @@
   - [Python async await](#python-async-await)
   - [Python单文件执行快速验证概念](#python%E5%8D%95%E6%96%87%E4%BB%B6%E6%89%A7%E8%A1%8C%E5%BF%AB%E9%80%9F%E9%AA%8C%E8%AF%81%E6%A6%82%E5%BF%B5)
   - [Python remote repl for debug不要在线上编程](#python-remote-repl-for-debug%E4%B8%8D%E8%A6%81%E5%9C%A8%E7%BA%BF%E4%B8%8A%E7%BC%96%E7%A8%8B)
+  - [Emacs yasnippet帮助快速写脚手架代码, 算法脚手架](#emacs-yasnippet%E5%B8%AE%E5%8A%A9%E5%BF%AB%E9%80%9F%E5%86%99%E8%84%9A%E6%89%8B%E6%9E%B6%E4%BB%A3%E7%A0%81-%E7%AE%97%E6%B3%95%E8%84%9A%E6%89%8B%E6%9E%B6)
+  - [Python lambda演算](#python-lambda%E6%BC%94%E7%AE%97)
 
 ## 相关资源
 * [JavaScript函数式的列表](https://github.com/chanshunli/jim-emacs-fun-es6)
@@ -508,6 +510,15 @@ print(asyncio.run(test_get_response("hi")))
    ;; press tab will jump to next point for edit
    ("async" "async def ${1:function_name}(${2:args}):\n    ${0:# TODO: }\n\n${3:python-function}\n\nawait ${1}(${2})" "async await") ;; $0是最后回到的点。
    ))
+
+(yas-define-snippets
+ 'ruby-mode
+ '(("puts" "
+puts -> {
+  ${1:funs}
+}[]
+" "jimw eval buffer")))
+
 ```
 
 ## Python lambda演算
