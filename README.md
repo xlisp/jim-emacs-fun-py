@@ -531,3 +531,12 @@ puts -> {
   add[100] #=> 101
 }[]
 ```
+
+## 快速万能同步转异步语法
+
+```python
+import sync2asyncio as s2a
+s2a.simple_run_in_executor(time.sleep, 5) # 等效 await asyncio.sleep(5)
+#=> <coroutine object simple_run_in_executor at 0x1320cc760>
+```
+
