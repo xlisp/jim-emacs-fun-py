@@ -1,0 +1,6 @@
+// Function Call Diagram
+digraph {
+	foo -> bar
+	foo -> baz
+	bar -> baz
+}
