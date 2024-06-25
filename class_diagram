@@ -1,0 +1,8 @@
+// Class Diagram
+digraph {
+	Animal -> Bird
+	Mammal -> Cat
+	Mammal -> Dog
+	Animal -> Mammal
+	Bird -> Sparrow
+}
