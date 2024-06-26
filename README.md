@@ -535,8 +535,13 @@ puts -> {
 ## 快速万能同步转异步语法
 
 ```python
+import asyncio
 import sync2asyncio as s2a
 s2a.simple_run_in_executor(time.sleep, 5) # 等效 await asyncio.sleep(5)
 #=> <coroutine object simple_run_in_executor at 0x1320cc760>
+
+# 运行coroutine对象或者运行异步函数: 不适用于 event loop： *** RuntimeError: asyncio.run() cannot be called from a running event loop
+asyncio.run(s2a.simple_run_in_executor(time.sleep, 5))
+
 ```
 
