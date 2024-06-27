@@ -2,7 +2,7 @@ import litellm
 import json
 import os
 
-# https://litellm.vercel.app/docs/completion/function_call
+# https://litellm.vercel.app/docs/completion/function_call => TODO: 做成Emacs的助理Assistant，function calling本地的函数完成编辑，比如语音说一句，然后function calling调用Emacs函数编辑本地代码
 
 # Example dummy function hard coded to return the same weather
 # In production, this could be your backend API or an external API
@@ -75,7 +75,7 @@ def test_parallel_function_call():
                 messages.append(
                     {
                         "tool_call_id": tool_call.id,
-                        "role": "tool",
+                        "role": "tool", ## Assistant API 支持三种 工具：代码解释器（Code Interpreter）、信息检索（Retrieval）和函数调用（Function calling） 。=> Function calling是tools属性。
                         "name": function_name,
                         "content": function_response,
                     }
@@ -91,11 +91,11 @@ def test_parallel_function_call():
 
 test_parallel_function_call()
 
-# First LLM Response:
+# First LLM Response: #=> 两次返回回来的消息都是机器人 AI 助理assistant的返回：role='assistant'。
 #  ModelResponse(id='chatcmpl-9cvTuJzxTb7YOyskpMCQpL2m0L9Ph', choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"location": "San Francisco, CA", "unit": "celsius"}', name='get_current_weather'), id='call_FxEx2tHfsSXE4bB2CnOMlkyC', type='function'), ChatCompletionMessageToolCall(function=Function(arguments='{"location": "Tokyo, Japan", "unit": "celsius"}', name='get_current_weather'), id='call_5TDYpjQnC5BOx70VyuSLKvIw', type='function'), ChatCompletionMessageToolCall(function=Function(arguments='{"location": "Paris, France", "unit": "celsius"}', name='get_current_weather'), id='call_yPp8Nnag4P8CIC0VH74GkrMv', type='function')]))], created=1719064450, model='gpt-3.5-turbo-1106', object='chat.completion', system_fingerprint='fp_3d37c73133', usage=Usage(completion_tokens=83, prompt_tokens=88, total_tokens=171))
-# 
+#
 # Length of tool calls 3
-# 
-# Second LLM response:
+#
+# Second LLM response: #=》二次调用了本地函数get_current_weather，再次组合返回回来消息： role='assistant'。
 #  ModelResponse(id='chatcmpl-9cvTv5FEUdVnNr5q6xGLyhZ4CGtuh', choices=[Choices(finish_reason='stop', index=0, message=Message(content='Currently in San Francisco, the weather is 72°F. In Tokyo, the weather is 10°C, and in Paris, the weather is 22°C.', role='assistant'))], created=1719064451, model='gpt-3.5-turbo-1106', object='chat.completion', system_fingerprint='fp_3d37c73133', usage=Usage(completion_tokens=33, prompt_tokens=175, total_tokens=208))
-# 
+#
