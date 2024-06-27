@@ -6,7 +6,7 @@
 from openai import OpenAI
 client = OpenAI()
 
-## Step 1: Create an Assistant
+## Step 1: Create an Assistant: 一个启用了代码解释器工具的个人数学辅导 Assistant
 assistant = client.beta.assistants.create(
     name="Math Tutor",
     instructions="You are a personal math tutor. Write and run code
@@ -15,7 +15,7 @@ assistant = client.beta.assistants.create(
     model="gpt-4o",
 )
 
-## Step 2: Create a Thread
+## Step 2: Create a Thread : Thread 就像是一场会话。我们建议在用户开始交流时就为每位用户创建一个 Thread。在这个 Thread 里，您可以通过创建消息（Messages）来添加用户特定的情境和文件 。相当于session
 thread = client.beta.threads.create()
 
 assistant #=>
@@ -24,7 +24,7 @@ Assistant(id='asst_jrgDEVIB5xFT0PtL8og5gziq', created_at=1719490632, description
 thread #=>
 Thread(id='thread_qdHXsqAYR0k62AlVugZbKWeB', created_at=1719490637, metadata={}, object='thread', tool_resources=ToolResources(code_interpreter=None, file_search=None))
 
-## Step 3: Add a Message to the Thread
+## Step 3: Add a Message to the Thread: 向 Thread 添加消息消息（Message）包含用户的文本内容，用户还可以选择上传任何 文件
 message = client.beta.threads.messages.create(
      thread_id=thread.id,
      role="user",
@@ -34,8 +34,7 @@ message = client.beta.threads.messages.create(
 message #=>
 Message(id='msg_SmCP8YYkyWslT9b9zUrTyQXJ', assistant_id=None, attachments=[], completed_at=None, content=[TextContentBlock(text=Text(annotations=[], value='I need to solve the equation `3x + 11 = 14`. Can you help me?'), type='text')], created_at=1719490652, incomplete_at=None, incomplete_details=None, metadata={}, object='thread.message', role='user', run_id=None, status=None, thread_id='thread_qdHXsqAYR0k62AlVugZbKWeB')
 
-## 4. Create Run
-
+## 4. Create Run: 要让 Assistant 对用户的消息做出反应，您需要创建一个 运行实例（Run）。这会让 Assistant 阅读整个 Thread，并决定是调用工具还是直接使用模型来以最合适的方式回答用户的问题。在运行过程中，Assistant 会添加标记为 role="assistant" 的消息到 Thread 中。
 坚持去λ化(中-易) ~  @ run = client.beta.threads.runs.create_and_poll(
 .....................   thread_id=thread.id,
 .....................   assistant_id=assistant.id,
