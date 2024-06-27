@@ -3,3 +3,4 @@
 .nrepl-port
 .ipynb_checkpoints/
 *.pdf
+*.gv
