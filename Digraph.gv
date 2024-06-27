@@ -1,0 +1,17 @@
+digraph {
+	A
+	object -> A
+	B
+	A -> B
+	object -> A
+	C
+	A -> C
+	object -> A
+	D
+	B -> D
+	A -> B
+	object -> A
+	C -> D
+	A -> C
+	object -> A
+}
