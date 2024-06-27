@@ -1,6 +1,9 @@
 import graphviz
 import inspect
 # GPT: python project show class graphviz relations
+# TODO: 如何嵌入代码当中，实时查看类列表之间的关系呢？
+# 1. import进来所有相关的类，然后调用函数create_class_diagram就好了。
+# 2. 用ag 搜索相关的类，比如一个函数在所有文件中使用，找到它的类的列表，传递给这个create_class_diagram就好了
 class A:
      pass
 
