@@ -20,7 +20,7 @@ llm_with_stop = llm.bind(stop=["\nObservation"]) #=> 这里有个观察者，判
 
 
 # 准备我们的工具：这里用到 DuckDuckGo 搜索引擎，和一个基于 LLM 的计算器 =》相当于用了openai的function calling
-tools = load_tools(["ddg-search", "llm-math"], llm=llm)
+tools = load_tools(["ddg-search", "llm-math"], llm=llm) ## 需要用ddg-search搜索两个城市的天气温度，然后用计算器工具计算两个温度的差
 
 # 准备核心提示词：这里从 LangChain Hub 加载了 ReAct 模式的提示词，并填充工具的文本描述 =》 反思类型：reason action 理由和动作。
 prompt = hub.pull("hwchase17/react")
