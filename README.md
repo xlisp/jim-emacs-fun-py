@@ -98,7 +98,7 @@ print(f\"====Package: {__package__}\")
 ```
 
 ## Emacs 开发Elisp，Clojure类似的体验，构建快速纠错反馈循环 
-- [ ] 可支持发送函数，语法检查发送整个函数
+- [x] 可支持发送函数，语法检查发送整个函数
 - [x] 发送行以及实现send-line-to-eshell
 - [ ] 发送整个文件`source file.py`，给eshell的ipython的debug 或者是xonsh 
 ```elisp
@@ -147,7 +147,63 @@ print(f\"====Package: {__package__}\")
     (back-to-indentation))))
 
 ```
+###  最为激动的效率提示🎉
+* C-c e 单行 & C-c f多行
+```elisp
+(defun parse-python-code-from-line (file line)
+  "Parse Python code from a specific LINE in FILE."
+  (interactive "fPython file: \nnLine number: ") ;; =>这里可以选择文件很棒
+  (with-temp-buffer
+    (insert-file-contents file)
+    (goto-line line)
+    (let ((code (buffer-substring (point) (line-end-position))))
+      (forward-line 1)
+      (setq code (concat code "\n" (buffer-substring (point) (line-end-position))))
+      ;; for test
+      (setq eval-py-code code)
+      ;; Check if the code is syntactically correct
+      (if (python-syntax-check (remove-python-indent (format "\n%s\n" code)) )
+          eval-py-code ;; (message "The Python code is syntactically correct.")
+        ;; (message "The Python code has syntax errors.")
+        eval-py-code                    ;;; 就算是有错也发回去！
+        ))))
 
+(defun python-syntax-check (code)
+  "Check if the given Python CODE is syntactically correct."
+  ;; vi /var/folders/5k/9q_nmyvn213417sycp1vmgxh0000gn/T/temp-python-codeSHRhG1.py
+  (let ((temp-file (make-temp-file "temp-python-code" nil ".py")))
+    ;; => TODO: 通过写临时文件的方法来C-c v eval buffer 不就行了吗？，回头删掉就好了，写好正确之后，一个函数把他们剪切回来就好了
+    (with-temp-file temp-file
+      (insert code))
+    (let ((output (shell-command-to-string (concat "python3 -m py_compile " temp-file))))
+      (delete-file temp-file)
+      ;; (message temp-file)
+      (string-empty-p output))))
+
+(defun goto-line (line)
+  "Go to the specified LINE."
+  (goto-char (point-min))
+  (forward-line (1- line)))
+
+;;-------
+(defun send-ast-to-eshell ()
+  (interactive)
+  (let ((code (parse-python-code-from-line (buffer-file-name)
+                                           (line-number-at-pos))))
+    (save-excursion
+      ;; (switch-to-buffer-other-window "*eshell*")
+      (with-current-buffer "*eshell*"
+        (goto-char (point-max))
+        (insert code)
+        (eshell-send-input)
+        (eshell-send-input)
+        (eshell-scroll-to-bottom)))))
+
+(global-set-key (kbd "C-c e") 'send-line-to-eshell)   ;; e python单行代码
+(global-set-key (kbd "C-c r") 'send-region-to-eshell) ;; 范围r
+(global-set-key (kbd "C-c f") 'send-ast-to-eshell)    ;; 当前代码向下遍历
+
+```
 ## `M-x py-utf-8`
 ```emacs-lisp
 (defun py-utf-8 ()
