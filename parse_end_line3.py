@@ -7,7 +7,6 @@ import astunparse
 filename = sys.argv[1]
 line_number = int(sys.argv[2])
 
-
 # Step 1: Read the code from the file
 with open(filename, 'r') as file:
     source_code = file.read()
