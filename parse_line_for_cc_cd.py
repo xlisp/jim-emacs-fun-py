@@ -32,7 +32,7 @@ def get_code_at_line(file_path, line_number):
 
 # Example usage
 file_path = sys.argv[1] #'parse_end_line_entire.py'
-line_number = sys.argv[2]
+line_number = int(sys.argv[2])
 print(get_code_at_line(file_path, line_number))
 
 # 19行：对了 =》 ！！！！可以作为C-c d的替代方案了
