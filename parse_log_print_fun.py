@@ -51,8 +51,8 @@ def main():
     for result in results:
         if isinstance(result, tuple):
             #print(f"File: {result[0]}, Line: {result[1]} Code: {result[2]}\n")
-            print(f"======= File: {result[0]}, Line: {result[1]}\n")
-            print(os.system(f'/Users/emacspy/EmacsPyPro/jim-emacs-fun-py/parse_line_to_fundefine2.py {result[0]} {result[1]}'))
+            print(f"#======= File: {result[0]}, Line: {result[1]}\n")
+            os.system(f'/Users/emacspy/EmacsPyPro/jim-emacs-fun-py/parse_line_to_fundefine2.py {result[0]} {result[1]}')
         else:
             print(result)
 
