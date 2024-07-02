@@ -97,10 +97,10 @@ print(f\"====Package: {__package__}\")
 
 ```
 
-## Emacs 开发Elisp，Clojure类似的体验，构建快速纠错反馈循环 
+## Emacs 开发Elisp，Clojure类似的体验，构建快速纠错反馈循环
 - [x] 可支持发送函数，语法检查发送整个函数
 - [x] 发送行以及实现send-line-to-eshell
-- [ ] 发送整个文件`source file.py`，给eshell的ipython的debug 或者是xonsh 
+- [ ] 发送整个文件`source file.py`，给eshell的ipython的debug 或者是xonsh
 ```elisp
 ;; (+ 1 2) ;; M-x send-region-to-eshell is OK
 ;; 1 + 2 ; Eshell start ipython is OK, sent code eval ok.
@@ -276,6 +276,22 @@ filter(lambda x: myfn(x, 222), [2, -5, 9, -7, 2, 5, 4, -1, 0, -3, 8]) #=> [2, 9,
 def aaa(a):
     yield a
 next(aaa(1)) #=> 1
+
+#--- https://stackoverflow.com/questions/14413969/why-does-next-raise-a-stopiteration-but-for-do-a-normal-return
+def countdown(n):
+    print("counting down")
+    while n >= 9:
+        yield n
+        n = n - 1
+
+for x in countdown(10):
+    print(x)
+
+c = countdown(10)
+next(c) #=> 10
+next(c) #=>9
+next(c) # StopIteration                             Traceback (most recent call last)
+
 ```
 ## sorted
 ```py
@@ -364,7 +380,7 @@ $ pytest  tests/test_min_max_test.py::test_min
 * ^^ 原则：发现是一个阻塞操作, 就新建一个async协程对象, 当队列来处理，然后队列里面需要做一个'callback'操作队列的单个元素-处理队的操作: 通常再定义一个async函数去await处理它如`async def ws_send(word)`  ^^
 *  async协程对象对象里面可以包含async，是递归的, await只能调用async定义的方法
 * https://martinxpn.medium.com/async-await-in-python-asyncio-deep-dive-76-100-days-of-python-31b44cb28d82
-*  如果一个函数有阻塞操作，如time.sleep(1) , 就需要头部加上`async def xxx`, 然后阻塞的地方加上`await asyncio.sleep` or `await litellm.acompletion(..)` 
+*  如果一个函数有阻塞操作，如time.sleep(1) , 就需要头部加上`async def xxx`, 然后阻塞的地方加上`await asyncio.sleep` or `await litellm.acompletion(..)`
 *  如果函数里面还有多个的阻塞操作：也需要新建一个async协程对象 `async with aiohttp.ClientSession()`, 然后await其结果`await fetch_html(session, url)`
 *  或者是一个"流队列对象"，也可以新建一个async协程对象`async for chunk in llm_response:`, 然后await其结果`await ws_send_msg(word)`
 * await 只能在async函数里面去使用：`SyntaxError: 'await' outside async function`, 而且只能await调用coroutine对象或者是async函数
@@ -435,7 +451,7 @@ async def test_get_response_stream(q):
         await ws_send(res)
 
 asyncio.run(test_get_response_stream("hi"))
-# => 
+# =>
 # Hello
 # Hello!
 # Hello! How
@@ -503,7 +519,7 @@ async def main():
 
 # Run the main function
 asyncio.run(main())
-# ==> 
+# ==>
 # Logging: First log message
 # Logging: Second log message
 
@@ -545,7 +561,7 @@ print(asyncio.run(test_get_response("hi")))
 ## Python remote repl for debug不要在线上编程
 
 ```elisp
-;; TODO: kungfu_todo_for_ipython.el 改成IPython的版本 
+;; TODO: kungfu_todo_for_ipython.el 改成IPython的版本
 (defun drb-shell (cmd fn &rest args)
   (let* ((args
 	  (if (null args) ""
@@ -600,4 +616,3 @@ s2a.simple_run_in_executor(time.sleep, 5) # 等效 await asyncio.sleep(5)
 asyncio.run(s2a.simple_run_in_executor(time.sleep, 5))
 
 ```
-
