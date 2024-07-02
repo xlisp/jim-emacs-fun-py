@@ -292,6 +292,46 @@ next(c) #=> 10
 next(c) #=>9
 next(c) # StopIteration                             Traceback (most recent call last)
 
+#--- https://stackoverflow.com/questions/37549846/how-to-use-yield-inside-async-function
+# 想起来了，之前看到连for循环都要加async！不然就无法执行。=> 对于调用createGenerator async 函数来说
+async def createGenerator():
+    mylist = range(3)
+    for i in mylist:
+        await asyncio.sleep(1)
+        yield i*i # 把循环留给下一个程序，迭代器传递
+
+async def start2():
+    async for i in createGenerator():
+        print(i)
+
+asyncio.run(start2())
+#=>
+0
+1
+4
+
+#--- https://fantasyhh.github.io/2020/01/12/python-yield-from/
+def chain(*iterables):
+    for it in iterables:
+        for i in it:
+            yield i
+
+s = 'ABC'
+t = tuple(range(3))
+list(chain(s, t)) #=> ['A', 'B', 'C', 0, 1, 2]
+
+## ----- 把for迭代器向后传递出去
+
+def chain2(*iterables):
+    for i in iterables:
+        yield from i
+
+chain2(s, t) #=> <generator object chain2 at 0x103749f20>
+
+list(chain2(s, t))
+# ['A', 'B', 'C', 0, 1, 2]
+
+
 ```
 ## sorted
 ```py
