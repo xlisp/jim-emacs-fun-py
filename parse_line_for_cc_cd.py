@@ -1,4 +1,7 @@
+#!/opt/anaconda3/bin/python
+
 import ast
+import sys
 # GPT: ast parse abc.py, and get you line number for abc.py , return current line function code string
 def get_code_at_line(file_path, line_number):
     """
@@ -28,8 +31,8 @@ def get_code_at_line(file_path, line_number):
         return f"Error: Syntax error in the file - {str(e)}"
 
 # Example usage
-file_path = 'parse_end_line_entire.py'
-line_number = 20
+file_path = sys.argv[1] #'parse_end_line_entire.py'
+line_number = sys.argv[2]
 print(get_code_at_line(file_path, line_number))
 
 # 19行：对了 =》 ！！！！可以作为C-c d的替代方案了
