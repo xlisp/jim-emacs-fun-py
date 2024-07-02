@@ -40,7 +40,7 @@ def find_code_in_project(project_path, filename, line_number):
     return "Error: File or line not found in the project."
 
 def main():
-    project_path = '/Users/emacspy/ClackyAIPro/staging-clacky-ai-agent' ##'pa/to/your/project'  # Replace with the actual project path
+    project_path = sys.argv[2]
     log_entries = parse_log(log_content)
 
     results = []
