@@ -669,3 +669,16 @@ asyncio.run(s2a.simple_run_in_executor(time.sleep, 5))
             await out.flush()
 
 ```
+## 异步的先后执行队列问题：
+[await_list_input_from_pre_output.py](./asyncio_least_action_principle/await_list_input_from_pre_output.py)
+
+```python
+# GPT: python future async: when request finished then do new async function do
+async def main():
+    # First async function
+    file_path = await fetch_from_socket()
+    
+    # Next async function, which waits for the first one to complete
+    await process_file(file_path)
+
+```
