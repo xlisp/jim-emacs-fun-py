@@ -484,7 +484,7 @@ async def test_get_response_stream(q):
         # await print(word) ## 只能await async过来的对象：TypeError: object NoneType can't be used in 'await' expression
         print(word)
     # for chunk in response: ## 无法直接取出，是一个队列对象，TypeError: 'AsyncStream' object is not an iterator
-    async for chunk in response:
+    async for chunk in response: # 1111 => 对于循环的await返回对象，也要async打头取出来，不然的话，没法取！=》不然就会有空set的pop问题
         word = chunk.choices[0].delta.content or ''
         res = res + word
         #await print(word, end='', flush=True) ## TypeError: object NoneType can't be used in 'await' expression
