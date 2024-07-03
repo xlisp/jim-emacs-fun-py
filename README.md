@@ -656,3 +656,16 @@ s2a.simple_run_in_executor(time.sleep, 5) # 等效 await asyncio.sleep(5)
 asyncio.run(s2a.simple_run_in_executor(time.sleep, 5))
 
 ```
+## 异步请求异步写入文件
+```python
+# https://stackoverflow.com/questions/41790750/writing-files-asynchronously
+# import aiofiles as aiof
+    async def download_socket_file(self, fullpath):
+        res = await self.socket.func_call("read_file", fullpath)
+        #with open(fullpath, 'wb') as f: 
+        #    f.write(res) ##=> 这种办法是无法写入文件的！=> TypeError: a bytes-like object is required, not 'str'
+        async with aiof.open(fullpath, "w") as out:
+            await out.write(res)
+            await out.flush()
+
+```
