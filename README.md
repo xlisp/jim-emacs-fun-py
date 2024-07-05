@@ -8,13 +8,12 @@
 - [ ] Emacs支持Py的测试自动化开发: 基于xonsh的实现
 - [ ] 可以跳转代码，以及搜索所有跳转打开的buffer
 
----
-
 - [Python函数式的列表与Lambda演算以及Lisp化快速反馈开发](#python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%88%97%E8%A1%A8%E4%B8%8Elambda%E6%BC%94%E7%AE%97%E4%BB%A5%E5%8F%8Alisp%E5%8C%96%E5%BF%AB%E9%80%9F%E5%8F%8D%E9%A6%88%E5%BC%80%E5%8F%91)
   - [相关资源](#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%BA%90)
   - [解决import的问题](#%E8%A7%A3%E5%86%B3import%E7%9A%84%E9%97%AE%E9%A2%98)
   - [解决抄Py效率](#%E8%A7%A3%E5%86%B3%E6%8A%84py%E6%95%88%E7%8E%87)
   - [Emacs 开发Elisp，Clojure类似的体验，构建快速纠错反馈循环](#emacs-%E5%BC%80%E5%8F%91elispclojure%E7%B1%BB%E4%BC%BC%E7%9A%84%E4%BD%93%E9%AA%8C%E6%9E%84%E5%BB%BA%E5%BF%AB%E9%80%9F%E7%BA%A0%E9%94%99%E5%8F%8D%E9%A6%88%E5%BE%AA%E7%8E%AF)
+    - [最为激动的效率提示🎉](#%E6%9C%80%E4%B8%BA%E6%BF%80%E5%8A%A8%E7%9A%84%E6%95%88%E7%8E%87%E6%8F%90%E7%A4%BA)
   - [`M-x py-utf-8`](#m-x-py-utf-8)
   - [lambda 多行的lambda使用](#lambda-%E5%A4%9A%E8%A1%8C%E7%9A%84lambda%E4%BD%BF%E7%94%A8)
   - [map](#map)
@@ -35,6 +34,9 @@
   - [Python remote repl for debug不要在线上编程](#python-remote-repl-for-debug%E4%B8%8D%E8%A6%81%E5%9C%A8%E7%BA%BF%E4%B8%8A%E7%BC%96%E7%A8%8B)
   - [Emacs yasnippet帮助快速写脚手架代码, 算法脚手架](#emacs-yasnippet%E5%B8%AE%E5%8A%A9%E5%BF%AB%E9%80%9F%E5%86%99%E8%84%9A%E6%89%8B%E6%9E%B6%E4%BB%A3%E7%A0%81-%E7%AE%97%E6%B3%95%E8%84%9A%E6%89%8B%E6%9E%B6)
   - [Python lambda演算](#python-lambda%E6%BC%94%E7%AE%97)
+  - [快速万能同步转异步语法](#%E5%BF%AB%E9%80%9F%E4%B8%87%E8%83%BD%E5%90%8C%E6%AD%A5%E8%BD%AC%E5%BC%82%E6%AD%A5%E8%AF%AD%E6%B3%95)
+  - [异步请求异步写入文件](#%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82%E5%BC%82%E6%AD%A5%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6)
+  - [异步的先后执行队列问题：](#%E5%BC%82%E6%AD%A5%E7%9A%84%E5%85%88%E5%90%8E%E6%89%A7%E8%A1%8C%E9%98%9F%E5%88%97%E9%97%AE%E9%A2%98)
 
 ## 相关资源
 * [JavaScript函数式的列表](https://github.com/chanshunli/jim-emacs-fun-es6)
@@ -98,9 +100,11 @@ print(f\"====Package: {__package__}\")
 ```
 
 ## Emacs 开发Elisp，Clojure类似的体验，构建快速纠错反馈循环
+
 - [x] 可支持发送函数，语法检查发送整个函数
 - [x] 发送行以及实现send-line-to-eshell
 - [ ] 发送整个文件`source file.py`，给eshell的ipython的debug 或者是xonsh
+
 ```elisp
 ;; (+ 1 2) ;; M-x send-region-to-eshell is OK
 ;; 1 + 2 ; Eshell start ipython is OK, sent code eval ok.
