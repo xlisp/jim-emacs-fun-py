@@ -18,3 +18,8 @@ def min(values):
 
   return _min
 
+
+for nu in [1,2,3]:
+  print(nu)
+
+print(1111)
