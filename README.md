@@ -10,6 +10,8 @@
 
 ![ccd-cce演示开发py](https://github.com/chanshunli/jim-emacs-fun-py/raw/master/ccd-cce%E6%BC%94%E7%A4%BA%E5%BC%80%E5%8F%91py.mov)
 
+<video src='https://github.com/chanshunli/jim-emacs-fun-py/raw/master/ccd-cce%E6%BC%94%E7%A4%BA%E5%BC%80%E5%8F%91py.mov' width=180/>
+
 - [Python函数式的列表与Lambda演算以及Lisp化快速反馈开发](#python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%9A%84%E5%88%97%E8%A1%A8%E4%B8%8Elambda%E6%BC%94%E7%AE%97%E4%BB%A5%E5%8F%8Alisp%E5%8C%96%E5%BF%AB%E9%80%9F%E5%8F%8D%E9%A6%88%E5%BC%80%E5%8F%91)
   - [相关资源](#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%BA%90)
   - [解决import的问题](#%E8%A7%A3%E5%86%B3import%E7%9A%84%E9%97%AE%E9%A2%98)
