@@ -56,5 +56,11 @@ def main():
         else:
             print(result)
 
+# xonshrc: 
+# USE => log_funcs("/Users/emacspy/Desktop/DONE_Devin_启动日志.log", "/Users/emacspy/AIMutilAgentPro/OpenDevin")
+def log_funcs(log, project):
+    /Users/emacspy/EmacsPyPro/jim-emacs-fun-py/parse_log_print_fun.py @(log) @(project)
+
 if __name__ == "__main__":
     main()
+
