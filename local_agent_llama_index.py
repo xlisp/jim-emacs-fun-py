@@ -3,6 +3,9 @@ import os
 os.environ["LANGFUSE_PUBLIC_KEY"] = "sk-lf-eb90153a-e53f-4997-9d99-4afc840b01ef"
 os.environ["LANGFUSE_SECRET_KEY"] = "pk-lf-63de746a-efed-49ea-af26-d9208853b652"
 os.environ["LANGFUSE_HOST"] = "http://localhost:3000"
+# => 本地LANGFUSE key 无效！
+#received error response: {'error': 'UnauthorizedError', 'message': "Invalid public key. Confirm that you've configured the correct host."}
+#Received 401 error by Langfuse server, not retrying: {'error': 'UnauthorizedError', 'message': "Invalid public key. Confirm that you've configured the correct host."}
 
 # langfuse_us_key() 是有效的 , ！！US的变量是有效的。!!!
 
