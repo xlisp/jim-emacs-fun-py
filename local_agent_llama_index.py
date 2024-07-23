@@ -240,7 +240,7 @@ agent_step_Metadata =
 system_role ="""
 You are designed to help with a variety of tasks, from answering questions to providing summaries to other types of analyses.
 
-## Tools
+## Tools 工具列表声明1
 
 You have access to a wide variety of tools. You are responsible for using the tools in any sequence you deem appropriate to complete the task at hand.
 This may require breaking the task into subtasks and using different tools to complete each subtask.
@@ -258,7 +258,7 @@ Tool Args: {"type": "object", "properties": {"a": {"title": "A", "type": "number
 
 
 
-## Output Format
+## Output Format 输出格式声明2: Thought Loop & Action Loop
 
 Please answer in the same language as the question and use the following format:
 
@@ -330,7 +330,87 @@ function_call1 =
     }
 }
 
-function_call =
+## 第二次LLM请求: UA对话。
+#system_role 和上一个一样
+#user: What is 20+(2*4)? Calculate step by step.
+assistant_role = """
+Thought: The current language of the user is English. I need to use a tool to help me answer the question.
+Action: add
+Action Input: {'a': 20, 'b': 8}
+"""
+# 11111 Observation 是用户输入输出的repl，+ x
+user_role = """
+"Observation: 28"
+"""
+assistant_role = """
+Thought: Now that we know the result of 20+(2*4), let's analyze this step by step. We can use another tool to multiply 2 and 4 first.
+Action: multiply
+Action Input: {'a': 2, 'b': 4}
+"""
+
+## 第二次function_call
+function_call2 =
+{
+    "tool": {
+        "name": "multiply",
+        "fn_schema": {},
+        "description": "multiply(a: float, b: float) -> float\nMultiply two numbers and returns the product",
+        "return_direct": false
+    },
+    "function_call": {
+        "a": 2,
+        "b": 4
+    }
+}
+#=> {    "function_call_response": "8"}
+
+## 第三次llm请求
+#user
+"What is 20+(2*4)? Calculate step by step."
+#assistant
+"Thought: The current language of the user is English. I need to use a tool to help me answer the question.
+Action: add
+Action Input: {'a': 20, 'b': 8}"
+#user
+"Observation: 28"
+#assistant
+"Thought: Now that we know the result of 20+(2*4), let's analyze this step by step. We can use another tool to multiply 2 and 4 first.
+Action: multiply
+Action Input: {'a': 2, 'b': 4}"
+#user
+"Observation: 8"
+#assistant
+"Thought: Now that we know the result of 2*4 is 8. We can substitute this value back into the original equation to get 20+8.
+Action: add
+Action Input: {'a': 20, 'b': 8}"
+
+## 第四次llm请求
+#user
+"What is 20+(2*4)? Calculate step by step."
+#assistant
+"Thought: The current language of the user is English. I need to use a tool to help me answer the question.
+Action: add
+Action Input: {'a': 20, 'b': 8}"
+#user
+"Observation: 28"
+#assistant
+"Thought: Now that we know the result of 20+(2*4), let's analyze this step by step. We can use another tool to multiply 2 and 4 first.
+Action: multiply
+Action Input: {'a': 2, 'b': 4}"
+#user
+"Observation: 8"
+#assistant
+"Thought: Now that we know the result of 2*4 is 8. We can substitute this value back into the original equation to get 20+8.
+Action: add
+Action Input: {'a': 20, 'b': 8}"
+#user
+"Observation: 28"
+#assistant
+"Thought: I can answer without using any more tools. I'll use the user's language to answer
+Answer: The final result is indeed 28!"
+
+# 最后一次function_call:
+function_call3 =
 {
     "tool": {
         "name": "add",
@@ -343,3 +423,4 @@ function_call =
         "b": 8
     }
 }
+#=> {   "function_call_response": "28"}
