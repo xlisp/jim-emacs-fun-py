@@ -1,9 +1,23 @@
 # https://github.com/run-llama/python-agents-tutorial/blob/main/2_local_agent.py
+import os
+os.environ["LANGFUSE_PUBLIC_KEY"] = "sk-lf-eb90153a-e53f-4997-9d99-4afc840b01ef"
+os.environ["LANGFUSE_SECRET_KEY"] = "pk-lf-63de746a-efed-49ea-af26-d9208853b652"
+os.environ["LANGFUSE_HOST"] = "http://localhost:3000"
+
+# langfuse_us_key() 是有效的 , ！！US的变量是有效的。!!!
+
 from dotenv import load_dotenv
 load_dotenv()
 from llama_index.core.agent import ReActAgent
 from llama_index.llms.ollama import Ollama
 from llama_index.core.tools import FunctionTool
+
+# https://langfuse.com/docs/integrations/llama-index/get-started
+from llama_index.core import Settings
+from llama_index.core.callbacks import CallbackManager
+from langfuse.llama_index import LlamaIndexCallbackHandler
+langfuse_callback_handler = LlamaIndexCallbackHandler()
+Settings.callback_manager = CallbackManager([langfuse_callback_handler])
 
 def multiply(a: float, b: float) -> float:
     """Multiply two numbers and returns the product"""
@@ -143,4 +157,28 @@ print(response) #=> Answer: The result of 20+(2*4) is 28.
 # Answer: The result of 20+(2*4) is 28.
 # In [15]:
 #
+#
+
+## 调用llm的tracing: https://us.cloud.langfuse.com/project/clxfdeck6000fl5tkkzg8ut7r/traces/bc05dc1b-d0e1-41ae-95c7-713a29b2da08
+# 坚持去λ化(中-易) jim-emacs-fun-py  master @  prun python local_agent_llama_index.py
+# > Running step e1420a7c-c762-45b5-9b00-fb604dbf93ab. Step input: What is 20+(2*4)? Calculate step by step.
+# Thought: The current language of the user is English. I need to use a tool to help me answer the question.
+# Action: add
+# Action Input: {'a': 20, 'b': 8}
+# Observation: 28
+# > Running step 84e74b95-6aad-460b-8d15-d95a0f3ffa81. Step input: None
+# Thought: Now that we know the result of 20+(2*4), let's analyze this step by step. We can use another tool to multiply 2 and 4 first.
+# Action: multiply
+# Action Input: {'a': 2, 'b': 4}
+# Observation: 8
+# > Running step 25901cb7-6e1a-4430-8257-801343919c34. Step input: None
+# Thought: Now that we know the result of 2*4 is 8. We can substitute this value back into the original equation to get 20+8.
+# Action: add
+# Action Input: {'a': 20, 'b': 8}
+# Observation: 28
+# > Running step 6b4201c2-93a9-4df3-a3dd-cc281915cba2. Step input: None
+# Thought: I can answer without using any more tools. I'll use the user's language to answer
+# Answer: The final result is indeed 28!
+# The final result is indeed 28!
+# 坚持去λ化(中-易) jim-emacs-fun-py  master @
 #
