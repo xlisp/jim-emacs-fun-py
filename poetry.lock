@@ -793,6 +793,20 @@ llama-index-core = ">=0.10.1,<0.11.0"
 sentence-transformers = ">=2.6.1"
 
 [[package]]
+name = "llama-index-llms-ollama"
+version = "0.1.6"
+description = "llama-index llms ollama integration"
+optional = false
+python-versions = "<4.0,>=3.8.1"
+files = [
+    {file = "llama_index_llms_ollama-0.1.6-py3-none-any.whl", hash = "sha256:23b4809edd088315ee91f0d154e4511af65d0379eb17c57c59c61f9606556514"},
+    {file = "llama_index_llms_ollama-0.1.6.tar.gz", hash = "sha256:329f9452ebc2e326123260b776213a0b2fd13a7c7d38cbdda6153cd3d3d243ff"},
+]
+
+[package.dependencies]
+llama-index-core = ">=0.10.1,<0.11.0"
+
+[[package]]
 name = "llama-index-llms-openai"
 version = "0.1.26"
 description = "llama-index llms openai integration"
@@ -2818,4 +2832,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "994829fb1723d17e67063ab0261b1cf88b7eecadccbd0bdf92647b23272b8508"
+content-hash = "db0ac415cd110409862f82a14fb9a1ae6758d763f841a31057fdb47850f137ab"
