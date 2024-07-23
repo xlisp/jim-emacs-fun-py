@@ -188,3 +188,158 @@ print(response) #=> Answer: The result of 20+(2*4) is 28.
 # The final result is indeed 28!
 # 坚持去λ化(中-易) jim-emacs-fun-py  master @
 #
+
+# https://us.cloud.langfuse.com/project/clxfdeck6000fl5tkkzg8ut7r/traces/bc05dc1b-d0e1-41ae-95c7-713a29b2da08?observation=7652a1dc-8392-42e5-83a1-d6f7af9f7dea
+
+# 输入 [ "What is 20+(2*4)? Calculate step by step."] => The final result is indeed 28! 输出。
+agent_step_Metadata =
+{
+    "sources": [
+        {
+            "content": "28",
+            "raw_input": {
+                "args": [],
+                "kwargs": {
+                    "a": 20,
+                    "b": 8
+                }
+            },
+            "tool_name": "add",
+            "raw_output": 28
+        },
+        {
+            "content": "8",
+            "raw_input": {
+                "args": [],
+                "kwargs": {
+                    "a": 2,
+                    "b": 4
+                }
+            },
+            "tool_name": "multiply",
+            "raw_output": 8
+        },
+        {
+            "content": "28",
+            "raw_input": {
+                "args": [],
+                "kwargs": {
+                    "a": 20,
+                    "b": 8
+                }
+            },
+            "tool_name": "add",
+            "raw_output": 28
+        }
+    ],
+    "metadata": null,
+    "source_nodes": [],
+    "is_dummy_stream": false
+}
+## 第一次llm请求：
+system_role ="""
+You are designed to help with a variety of tasks, from answering questions to providing summaries to other types of analyses.
+
+## Tools
+
+You have access to a wide variety of tools. You are responsible for using the tools in any sequence you deem appropriate to complete the task at hand.
+This may require breaking the task into subtasks and using different tools to complete each subtask.
+
+You have access to the following tools:
+> Tool Name: multiply
+Tool Description: multiply(a: float, b: float) -> float
+Multiply two numbers and returns the product
+Tool Args: {"type": "object", "properties": {"a": {"title": "A", "type": "number"}, "b": {"title": "B", "type": "number"}}, "required": ["a", "b"]}
+
+> Tool Name: add
+Tool Description: add(a: float, b: float) -> float
+Add two numbers and returns the sum
+Tool Args: {"type": "object", "properties": {"a": {"title": "A", "type": "number"}, "b": {"title": "B", "type": "number"}}, "required": ["a", "b"]}
+
+
+
+## Output Format
+
+Please answer in the same language as the question and use the following format:
+
+```
+Thought: The current language of the user is: (user's language). I need to use a tool to help me answer the question.
+Action: tool name (one of multiply, add) if using a tool.
+Action Input: the input to the tool, in a JSON format representing the kwargs (e.g. {"input": "hello world", "num_beams": 5})
+```
+
+Please ALWAYS start with a Thought.
+
+NEVER surround your response with markdown code markers. You may use code markers within your response if you need to.
+
+Please use a valid JSON format for the Action Input. Do NOT do this {'input': 'hello world', 'num_beams': 5}.
+
+If this format is used, the user will respond in the following format:
+
+```
+Observation: tool response
+```
+
+You should keep repeating the above format till you have enough information to answer the question without using any more tools. At that point, you MUST respond in the one of the following two formats:
+
+```
+Thought: I can answer without using any more tools. I'll use the user's language to answer
+Answer: [your answer here (In the same language as the user's question)]
+```
+
+```
+Thought: I cannot answer the question with the provided tools.
+Answer: [your answer here (In the same language as the user's question)]
+```
+
+## Current Conversation
+
+Below is the current conversation consisting of interleaving human and assistant messages.
+
+"""
+user_role="""
+"What is 20+(2*4)? Calculate step by step."
+"""
+assistant_role="""
+Thought: The current language of the user is English. I need to use a tool to help me answer the question.
+
+Action: add
+Action Input: {"a": 20, "b": 8}
+
+Thought: Now that we have calculated 20+8=28, let's proceed with the rest of the calculation.
+
+Action: multiply
+Action Input: {"a": 2, "b": 4}
+
+Thought: Now that we have calculated 2*4=8, let's add this to the previous result.
+
+Answer: 28+8=36
+"""
+## 第一次function_call
+function_call1 =
+{
+    "tool": {
+        "name": "add",
+        "fn_schema": {},
+        "description": "add(a: float, b: float) -> float\nAdd two numbers and returns the sum",
+        "return_direct": false
+    },
+    "function_call": {
+        "a": 20,
+        "b": 8
+    }
+}
+
+function_call =
+{
+    "tool": {
+        "name": "add",
+        "fn_schema": {},
+        "description": "add(a: float, b: float) -> float\nAdd two numbers and returns the sum",
+        "return_direct": false
+    },
+    "function_call": {
+        "a": 20,
+        "b": 8
+    }
+}
