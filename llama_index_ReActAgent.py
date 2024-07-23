@@ -6,6 +6,14 @@ from llama_index.core.agent import ReActAgent
 from llama_index.llms.openai import OpenAI
 from llama_index.core.tools import FunctionTool
 
+# https://langfuse.com/docs/integrations/llama-index/get-started
+from llama_index.core import Settings
+from llama_index.core.callbacks import CallbackManager
+from langfuse.llama_index import LlamaIndexCallbackHandler
+ 
+langfuse_callback_handler = LlamaIndexCallbackHandler()
+Settings.callback_manager = CallbackManager([langfuse_callback_handler])
+
 def multiply(a: float, b: float) -> float:
     """Multiply two numbers and returns the product"""
     return a * b
