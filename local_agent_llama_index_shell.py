@@ -50,7 +50,7 @@ print(response) #=> The result of performing a mathematical operation on the ver
 
 ## TODO: 比如问加法和命令的：两个文件夹目录相差多少个文件？
 
-# --------
+# -------- llm trace: https://us.cloud.langfuse.com/project/clxfdeck6000fl5tkkzg8ut7r/traces/e0e82be1-79af-40d6-986f-1b8bc318f25e?observation=800ab32d-0bac-4a0a-993c-8978758295da
 
 # 坚持去λ化(中-易) jim-emacs-fun-py  master @ prun python local_agent_llama_index_shell.py
 # > Running step 40c7259d-0184-4ec3-bf25-073ffe1a5563. Step input: Execute the installation command npm install. If successful, it will return to npm list. If it fails, it will return to node -v.
