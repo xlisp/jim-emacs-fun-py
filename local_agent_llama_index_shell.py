@@ -109,199 +109,199 @@ print(response) #=> The result of performing a mathematical operation on the ver
 #
 
 # agent_step, i [Execute the installation command npm install. If successful, it will return to npm list. If it fails, it will return to node -v.] o : The result of performing a mathematical operation on the version number of Node (v22.3.0) is 66. , and metata: 
-{
-    "sources": [
-        {
-            "content": "npm error code ENOENT\nnpm error syscall open\nnpm error path /Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json\nnpm error errno -2\nnpm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json'\nnpm error enoent This is related to npm not being able to find a file.\nnpm error enoent\nnpm error A complete log of this run can be found in: /Users/emacspy/.npm/_logs/2024-07-23T11_41_07_039Z-debug-0.log\n",
-            "raw_input": {
-                "args": [],
-                "kwargs": {
-                    "command": "npm install"
-                }
-            },
-            "tool_name": "run_shell_command",
-            "raw_output": "npm error code ENOENT\nnpm error syscall open\nnpm error path /Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json\nnpm error errno -2\nnpm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json'\nnpm error enoent This is related to npm not being able to find a file.\nnpm error enoent\nnpm error A complete log of this run can be found in: /Users/emacspy/.npm/_logs/2024-07-23T11_41_07_039Z-debug-0.log\n"
-        },
-        {
-            "content": "v22.3.0\n",
-            "raw_input": {
-                "args": [],
-                "kwargs": {
-                    "command": "node -v"
-                }
-            },
-            "tool_name": "run_shell_command",
-            "raw_output": "v22.3.0\n"
-        },
-        {
-            "content": "3.3",
-            "raw_input": {
-                "args": [],
-                "kwargs": {
-                    "a": 2.3,
-                    "b": 1
-                }
-            },
-            "tool_name": "add",
-            "raw_output": 3.3
-        },
-        {
-            "content": "22.3",
-            "raw_input": {
-                "args": [],
-                "kwargs": {
-                    "a": 22.3,
-                    "b": 1
-                }
-            },
-            "tool_name": "multiply",
-            "raw_output": 22.3
-        },
-        {
-            "content": "Error: Could not parse output. Please follow the thought-action-input format. Try again.",
-            "raw_input": {},
-            "tool_name": "unknown",
-            "raw_output": "Error: Could not parse output. Please follow the thought-action-input format. Try again."
-        },
-        {
-            "content": "25",
-            "raw_input": {
-                "args": [],
-                "kwargs": {
-                    "a": 22,
-                    "b": 3
-                }
-            },
-            "tool_name": "add",
-            "raw_output": 25
-        },
-        {
-            "content": "Error: Could not parse output. Please follow the thought-action-input format. Try again.",
-            "raw_input": {},
-            "tool_name": "unknown",
-            "raw_output": "Error: Could not parse output. Please follow the thought-action-input format. Try again."
-        },
-        {
-            "content": "66",
-            "raw_input": {
-                "args": [],
-                "kwargs": {
-                    "a": 22,
-                    "b": 3
-                }
-            },
-            "tool_name": "multiply",
-            "raw_output": 66
-        }
-    ],
-    "metadata": null,
-    "source_nodes": [],
-    "is_dummy_stream": false
-}
-
-# 第一个llm请求和funcall：
-user
-
-"Execute the installation command npm install. If successful, it will return to npm list. If it fails, it will return to node -v."
-assistant
-
-
-"Thought: The user wants me to execute a shell command to check if an installation is successful or not.
-
-Action: run_shell_command
-Action Input: {"command": "npm install"}
-
-Please respond with the output of the command execution."
-
-## 第一个funcall
-Input
-
-{
-tool: {
-name: "run_shell_command"
-fn_schema: {
-}
-description: "run_shell_command(command: str) -> str
-Runs a shell command and returns the output or error"
-return_direct: false
-}
-function_call: {
-command: "npm install"
-}
-}
-Output
-
-{
-function_call_response: "npm error code ENOENT
-npm error syscall open
-npm error path /Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json
-npm error errno -2
-npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json'
-npm error enoent This is related to npm not being able to find a file.
-npm error enoent
-npm error A complete log of this run can be found in: /Users/emacspy/.npm/_logs/2024-07-23T11_41_07_039Z-debug-0.log
-"
-}
-
-# 第二个llm请求和funcall：=》UA就是这个上下文，上一个UA故事列表是怎么样的？然后下一个应该怎么样？相当于你前面有几次成功案例，在这个session下面再继续提问！
-user
-
-
-"Observation: npm error code ENOENT
-npm error syscall open
-npm error path /Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json
-npm error errno -2
-npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json'
-npm error enoent This is related to npm not being able to find a file.
-npm error enoent
-npm error A complete log of this run can be found in: /Users/emacspy/.npm/_logs/2024-07-23T11_41_07_039Z-debug-0.log
-"
-assistant
-
-
-"Thought: The installation command failed due to an error related to a missing package.json file. Now, the user wants me to check the version of Node.
-Action: run_shell_command
-Action Input: {'command': 'node -v'}"
-
-## funcall：
-Input
-
-{
-tool: {
-name: "run_shell_command"
-fn_schema: {
-}
-description: "run_shell_command(command: str) -> str
-Runs a shell command and returns the output or error"
-return_direct: false
-}
-function_call: {
-command: "node -v"
-}
-}
-Output
-
-{
-function_call_response: "v22.3.0
-"
-}
-
-# 第三次llm调用和funcall：
-user
-
-"Observation: v22.3.0
-"
-assistant
-
-"Thought: The installation command failed again, and now I need to use another tool to answer this question.
-Action: add
-Action Input: {"a": 2.3, "b": 1}"
-
-## 第四次是错的了。。。
-"Observation: 3.3"
-assistant
-
-"Thought: The user wants me to perform a mathematical operation on the version number of Node (v22.3.0).
-Action: multiply
-Action Input: {"a": 22.3, "b": 1}"
-
+# {
+#     "sources": [
+#         {
+#             "content": "npm error code ENOENT\nnpm error syscall open\nnpm error path /Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json\nnpm error errno -2\nnpm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json'\nnpm error enoent This is related to npm not being able to find a file.\nnpm error enoent\nnpm error A complete log of this run can be found in: /Users/emacspy/.npm/_logs/2024-07-23T11_41_07_039Z-debug-0.log\n",
+#             "raw_input": {
+#                 "args": [],
+#                 "kwargs": {
+#                     "command": "npm install"
+#                 }
+#             },
+#             "tool_name": "run_shell_command",
+#             "raw_output": "npm error code ENOENT\nnpm error syscall open\nnpm error path /Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json\nnpm error errno -2\nnpm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json'\nnpm error enoent This is related to npm not being able to find a file.\nnpm error enoent\nnpm error A complete log of this run can be found in: /Users/emacspy/.npm/_logs/2024-07-23T11_41_07_039Z-debug-0.log\n"
+#         },
+#         {
+#             "content": "v22.3.0\n",
+#             "raw_input": {
+#                 "args": [],
+#                 "kwargs": {
+#                     "command": "node -v"
+#                 }
+#             },
+#             "tool_name": "run_shell_command",
+#             "raw_output": "v22.3.0\n"
+#         },
+#         {
+#             "content": "3.3",
+#             "raw_input": {
+#                 "args": [],
+#                 "kwargs": {
+#                     "a": 2.3,
+#                     "b": 1
+#                 }
+#             },
+#             "tool_name": "add",
+#             "raw_output": 3.3
+#         },
+#         {
+#             "content": "22.3",
+#             "raw_input": {
+#                 "args": [],
+#                 "kwargs": {
+#                     "a": 22.3,
+#                     "b": 1
+#                 }
+#             },
+#             "tool_name": "multiply",
+#             "raw_output": 22.3
+#         },
+#         {
+#             "content": "Error: Could not parse output. Please follow the thought-action-input format. Try again.",
+#             "raw_input": {},
+#             "tool_name": "unknown",
+#             "raw_output": "Error: Could not parse output. Please follow the thought-action-input format. Try again."
+#         },
+#         {
+#             "content": "25",
+#             "raw_input": {
+#                 "args": [],
+#                 "kwargs": {
+#                     "a": 22,
+#                     "b": 3
+#                 }
+#             },
+#             "tool_name": "add",
+#             "raw_output": 25
+#         },
+#         {
+#             "content": "Error: Could not parse output. Please follow the thought-action-input format. Try again.",
+#             "raw_input": {},
+#             "tool_name": "unknown",
+#             "raw_output": "Error: Could not parse output. Please follow the thought-action-input format. Try again."
+#         },
+#         {
+#             "content": "66",
+#             "raw_input": {
+#                 "args": [],
+#                 "kwargs": {
+#                     "a": 22,
+#                     "b": 3
+#                 }
+#             },
+#             "tool_name": "multiply",
+#             "raw_output": 66
+#         }
+#     ],
+#     "metadata": null,
+#     "source_nodes": [],
+#     "is_dummy_stream": false
+# }
+# 
+# # 第一个llm请求和funcall：
+# user
+# 
+# "Execute the installation command npm install. If successful, it will return to npm list. If it fails, it will return to node -v."
+# assistant
+# 
+# 
+# "Thought: The user wants me to execute a shell command to check if an installation is successful or not.
+# 
+# Action: run_shell_command
+# Action Input: {"command": "npm install"}
+# 
+# Please respond with the output of the command execution."
+# 
+# ## 第一个funcall
+# Input
+# 
+# {
+# tool: {
+# name: "run_shell_command"
+# fn_schema: {
+# }
+# description: "run_shell_command(command: str) -> str
+# Runs a shell command and returns the output or error"
+# return_direct: false
+# }
+# function_call: {
+# command: "npm install"
+# }
+# }
+# Output
+# 
+# {
+# function_call_response: "npm error code ENOENT
+# npm error syscall open
+# npm error path /Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json
+# npm error errno -2
+# npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json'
+# npm error enoent This is related to npm not being able to find a file.
+# npm error enoent
+# npm error A complete log of this run can be found in: /Users/emacspy/.npm/_logs/2024-07-23T11_41_07_039Z-debug-0.log
+# "
+# }
+# 
+# # 第二个llm请求和funcall：=》UA就是这个上下文，上一个UA故事列表是怎么样的？然后下一个应该怎么样？相当于你前面有几次成功案例，在这个session下面再继续提问！
+# user
+# 
+# 
+# "Observation: npm error code ENOENT
+# npm error syscall open
+# npm error path /Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json
+# npm error errno -2
+# npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json'
+# npm error enoent This is related to npm not being able to find a file.
+# npm error enoent
+# npm error A complete log of this run can be found in: /Users/emacspy/.npm/_logs/2024-07-23T11_41_07_039Z-debug-0.log
+# "
+# assistant
+# 
+# 
+# "Thought: The installation command failed due to an error related to a missing package.json file. Now, the user wants me to check the version of Node.
+# Action: run_shell_command
+# Action Input: {'command': 'node -v'}"
+# 
+# ## funcall：
+# Input
+# 
+# {
+# tool: {
+# name: "run_shell_command"
+# fn_schema: {
+# }
+# description: "run_shell_command(command: str) -> str
+# Runs a shell command and returns the output or error"
+# return_direct: false
+# }
+# function_call: {
+# command: "node -v"
+# }
+# }
+# Output
+# 
+# {
+# function_call_response: "v22.3.0
+# "
+# }
+# 
+# # 第三次llm调用和funcall：
+# user
+# 
+# "Observation: v22.3.0
+# "
+# assistant
+# 
+# "Thought: The installation command failed again, and now I need to use another tool to answer this question.
+# Action: add
+# Action Input: {"a": 2.3, "b": 1}"
+# 
+# ## 第四次是错的了。。。
+# "Observation: 3.3"
+# assistant
+# 
+# "Thought: The user wants me to perform a mathematical operation on the version number of Node (v22.3.0).
+# Action: multiply
+# Action Input: {"a": 22.3, "b": 1}"
+# 
