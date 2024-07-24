@@ -238,6 +238,7 @@ agent_step_Metadata =
 }
 ## 第一次llm请求：
 # cp llama_index/llama-index-core/llama_index/core/agent/react_multimodal/prompts.py  llama-index-react-prompts.py
+# => TODO 把这些ReAct实例化的提示词再次提交给LLM都测试一下
 system_role ="""
 You are designed to help with a variety of tasks, from answering questions to providing summaries to other types of analyses.
 
@@ -246,7 +247,7 @@ You are designed to help with a variety of tasks, from answering questions to pr
 You have access to a wide variety of tools. You are responsible for using the tools in any sequence you deem appropriate to complete the task at hand.
 This may require breaking the task into subtasks and using different tools to complete each subtask.
 
-You have access to the following tools:
+You have access to the following tools: ## 下面的是生成填充的工具列表{tool_desc}, 包含参数和注释使用。
 > Tool Name: multiply
 Tool Description: multiply(a: float, b: float) -> float
 Multiply two numbers and returns the product
@@ -265,7 +266,7 @@ Please answer in the same language as the question and use the following format:
 
 ```
 Thought: The current language of the user is: (user's language). I need to use a tool to help me answer the question.
-Action: tool name (one of multiply, add) if using a tool.
+Action: tool name (one of multiply, add) if using a tool. ## 工具列表再次声明变量填充：(one of {tool_names})
 Action Input: the input to the tool, in a JSON format representing the kwargs (e.g. {"input": "hello world", "num_beams": 5})
 ```
 
