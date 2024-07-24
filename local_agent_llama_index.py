@@ -38,7 +38,7 @@ def add(a: float, b: float) -> float:
 add_tool = FunctionTool.from_defaults(fn=add)
 
 #llm = Ollama(model="mixtral:8x7b", request_timeout=120.0) => 26GB太大了
-llm = Ollama(model="llama3:latest", request_timeout=120.0)
+llm = Ollama(model="llama3.1:latest", request_timeout=120.0)
 
 agent = ReActAgent.from_tools([multiply_tool, add_tool], llm=llm, verbose=True)
 
@@ -133,8 +133,8 @@ print(response) #=> Answer: The result of 20+(2*4) is 28.
 # In [11]: add_tool = FunctionTool.from_defaults(fn=add)
 # In [11]: add_tool = FunctionTool.from_defaults(fn=add)
 #
-# In [12]: llm = Ollama(model="llama3:latest", request_timeout=120.0)
-# llm = Ollama(model="llama3:latest", request_timeout=120.0)In [12]: llm = Ollama(model="llama3:latest", request_timeout=120.0)
+# In [12]: llm = Ollama(model="llama3.1:latest", request_timeout=120.0)
+# llm = Ollama(model="llama3.1:latest", request_timeout=120.0)In [12]: llm = Ollama(model="llama3.1:latest", request_timeout=120.0)
 #
 # In [13]: agent = ReActAgent.from_tools([multiply_tool, add_tool], llm=llm, verbose=True)
 # )

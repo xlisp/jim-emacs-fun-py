@@ -40,7 +40,7 @@ def run_shell_command(command: str) -> str:
         return e.stderr.decode('utf-8')
 shell_command_tool = FunctionTool.from_defaults(fn=run_shell_command)
 
-llm = Ollama(model="llama3:latest", request_timeout=120.0)
+llm = Ollama(model="llama3.1:latest", request_timeout=120.0)
 
 agent = ReActAgent.from_tools([multiply_tool, add_tool, shell_command_tool], llm=llm, verbose=True)
 
@@ -108,7 +108,7 @@ print(response) #=> The result of performing a mathematical operation on the ver
 #
 #
 
-# agent_step, i [Execute the installation command npm install. If successful, it will return to npm list. If it fails, it will return to node -v.] o : The result of performing a mathematical operation on the version number of Node (v22.3.0) is 66. , and metata: 
+# agent_step, i [Execute the installation command npm install. If successful, it will return to npm list. If it fails, it will return to node -v.] o : The result of performing a mathematical operation on the version number of Node (v22.3.0) is 66. , and metata:
 # {
 #     "sources": [
 #         {
@@ -198,24 +198,24 @@ print(response) #=> The result of performing a mathematical operation on the ver
 #     "source_nodes": [],
 #     "is_dummy_stream": false
 # }
-# 
+#
 # # 第一个llm请求和funcall：
 # user
-# 
+#
 # "Execute the installation command npm install. If successful, it will return to npm list. If it fails, it will return to node -v."
 # assistant
-# 
-# 
+#
+#
 # "Thought: The user wants me to execute a shell command to check if an installation is successful or not.
-# 
+#
 # Action: run_shell_command
 # Action Input: {"command": "npm install"}
-# 
+#
 # Please respond with the output of the command execution."
-# 
+#
 # ## 第一个funcall
 # Input
-# 
+#
 # {
 # tool: {
 # name: "run_shell_command"
@@ -230,7 +230,7 @@ print(response) #=> The result of performing a mathematical operation on the ver
 # }
 # }
 # Output
-# 
+#
 # {
 # function_call_response: "npm error code ENOENT
 # npm error syscall open
@@ -242,11 +242,11 @@ print(response) #=> The result of performing a mathematical operation on the ver
 # npm error A complete log of this run can be found in: /Users/emacspy/.npm/_logs/2024-07-23T11_41_07_039Z-debug-0.log
 # "
 # }
-# 
+#
 # # 第二个llm请求和funcall：=》UA就是这个上下文，上一个UA故事列表是怎么样的？然后下一个应该怎么样？相当于你前面有几次成功案例，在这个session下面再继续提问！
 # user
-# 
-# 
+#
+#
 # "Observation: npm error code ENOENT
 # npm error syscall open
 # npm error path /Users/emacspy/EmacsPyPro/jim-emacs-fun-py/package.json
@@ -257,15 +257,15 @@ print(response) #=> The result of performing a mathematical operation on the ver
 # npm error A complete log of this run can be found in: /Users/emacspy/.npm/_logs/2024-07-23T11_41_07_039Z-debug-0.log
 # "
 # assistant
-# 
-# 
+#
+#
 # "Thought: The installation command failed due to an error related to a missing package.json file. Now, the user wants me to check the version of Node.
 # Action: run_shell_command
 # Action Input: {'command': 'node -v'}"
-# 
+#
 # ## funcall：
 # Input
-# 
+#
 # {
 # tool: {
 # name: "run_shell_command"
@@ -280,28 +280,28 @@ print(response) #=> The result of performing a mathematical operation on the ver
 # }
 # }
 # Output
-# 
+#
 # {
 # function_call_response: "v22.3.0
 # "
 # }
-# 
+#
 # # 第三次llm调用和funcall：
 # user
-# 
+#
 # "Observation: v22.3.0
 # "
 # assistant
-# 
+#
 # "Thought: The installation command failed again, and now I need to use another tool to answer this question.
 # Action: add
 # Action Input: {"a": 2.3, "b": 1}"
-# 
+#
 # ## 第四次是错的了。。。
 # "Observation: 3.3"
 # assistant
-# 
+#
 # "Thought: The user wants me to perform a mathematical operation on the version number of Node (v22.3.0).
 # Action: multiply
 # Action Input: {"a": 22.3, "b": 1}"
-# 
+#
