@@ -20,6 +20,7 @@ llama-index-tools-google = "^0.1.6"
 llama-index-tools-yahoo-finance = "^0.1.1"
 flask-socketio = "^5.3.6"
 flask = "^3.0.3"
+ipython = "^8.26.0"
 
 [tool.poetry.group.dev.dependencies]
 langfuse = "^2.36.1"
