@@ -237,6 +237,7 @@ agent_step_Metadata =
     "is_dummy_stream": false
 }
 ## 第一次llm请求：
+# cp llama_index/llama-index-core/llama_index/core/agent/react_multimodal/prompts.py  llama-index-react-prompts.py
 system_role ="""
 You are designed to help with a variety of tasks, from answering questions to providing summaries to other types of analyses.
 
