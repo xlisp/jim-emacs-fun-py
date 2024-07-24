@@ -16,6 +16,8 @@ llama-index-llms-ollama = "^0.1.6"
 llama-index-readers-file = "^0.1.30"
 llama-index-embeddings-openai = "^0.1.11"
 llama-parse = "^0.4.9"
+llama-index-tools-google = "^0.1.6"
+llama-index-tools-yahoo-finance = "^0.1.1"
 
 [tool.poetry.group.dev.dependencies]
 langfuse = "^2.36.1"
