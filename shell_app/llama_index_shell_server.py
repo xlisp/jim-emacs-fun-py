@@ -1,32 +1,32 @@
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
 from llama_index.core.agent import ReActAgent
 from llama_index.llms.ollama import Ollama
 from llama_index.core.tools import FunctionTool
 from llama_index.core import Settings
 from llama_index.core.callbacks import CallbackManager
-from langfuse.llama_index import LlamaIndexCallbackHandler
 import subprocess
-
 from flask import Flask, request
 from flask_socketio import SocketIO, send
 import json
 
-# Initialize the Flask application
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app, cors_allowed_origins="*")
+from langfuse.llama_index import LlamaIndexCallbackHandler
 
 # Set up the Langfuse callback handler
 langfuse_callback_handler = LlamaIndexCallbackHandler()
 Settings.callback_manager = CallbackManager([langfuse_callback_handler])
-
 langfuse_callback_handler.set_trace_params(
   user_id="user-123",
   session_id="session-abc",
   tags=["ReAct shell"]
 )
+
+# Initialize the Flask application
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Define the functions to be used as tools
 def multiply(a: float, b: float) -> float:
