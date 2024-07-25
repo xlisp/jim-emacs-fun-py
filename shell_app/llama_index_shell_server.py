@@ -6,14 +6,15 @@ from llama_index.core.agent import ReActAgent
 from llama_index.llms.ollama import Ollama
 from llama_index.core.tools import FunctionTool
 from llama_index.core import Settings
-from llama_index.core.callbacks import CallbackManager
 import subprocess
 from flask import Flask, request
 from flask_socketio import SocketIO, send
 import json
 
-from langfuse.llama_index import LlamaIndexCallbackHandler
-
+# https://langfuse.com/docs/sdk/python/low-level-sdk#initialize-client
+# https://langfuse.com/docs/integrations/litellm/tracing
+from llama_index.core.callbacks import CallbackManager # 你的项目必须自己写CallbackManager => CallbackManager?? & ag CallbackManager | grep class => llama-index-core/llama_index/core/callbacks/base.py => 管理所有的callback 调用地方很多：Callback manager that handles callbacks for events within LlamaIndex: trace_id & trace_map & trace_stack
+from langfuse.llama_index import LlamaIndexCallbackHandler #=> LlamaIndex callback handler for Langfuse => StatefulSpanClient): self.root_span = root . span就在这个callback里面操作
 # Set up the Langfuse callback handler
 langfuse_callback_handler = LlamaIndexCallbackHandler()
 Settings.callback_manager = CallbackManager([langfuse_callback_handler])
