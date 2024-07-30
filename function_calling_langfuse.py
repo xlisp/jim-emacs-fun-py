@@ -54,7 +54,7 @@ def test_parallel_function_call():
         #span = trace.span(trace_id="test-funcall-tid")
         #litellm.generate(langfuseSpan= span) ## =>
         #litellm.generate(langfuseTrace= trace)
-        # ------- https://langfuse.com/docs/sdk/python/low-level-sdk
+        # ------- https://langfuse.com/docs/sdk/python/low-level-sdk => 能创建一颗树，但是没有数据在上面。。。都是空的
         trace = langfuse.trace(name = "llm-feature")
         retrieval = trace.span(name = "retrieval")
         retrieval.generation(name = "query-creation")
