@@ -22,6 +22,7 @@ flask-socketio = "^5.3.6"
 flask = "^3.0.3"
 ipython = "^8.26.0"
 jupyter-client = "^8.6.2"
+litellm = "^1.42.5"
 
 [tool.poetry.group.dev.dependencies]
 langfuse = "^2.36.1"
