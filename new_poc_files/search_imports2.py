@@ -1,4 +1,5 @@
 import os
+import sys
 
 def find_imports_in_file(file_path, base_dir):
     """Search for import statements in a single file and return them."""
@@ -59,12 +60,12 @@ def search_imports_in_directory(directory):
 def print_imports(imports):
     """Print the import statements."""
     for file_path, import_lines in imports:
-        print(f"\nIn file: {file_path}")
+        print(f"\n## In file: {file_path}")
         for line in import_lines:
-            print(f"  {line}")
+            print(f"{line}")
 
 if __name__ == "__main__":
-    directory = input("Enter the directory path to search for import statements: ")
+    directory = sys.argv[1] #input("Enter the directory path to search for import statements: ")
     imports = search_imports_in_directory(directory)
     print_imports(imports)
 
