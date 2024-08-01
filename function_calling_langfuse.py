@@ -82,6 +82,25 @@ def test_parallel_function_call():
         langfuse.trace(id=trace.id, output="Hi 👋")
         print(f"==========={trace.get_trace_url()}")
         # -----
+        # create span
+        span = langfuse.span( #TODO: 生成了标签，但是没有数据 ------ trace_id=langfuse_trace_id 是放到一块了。
+            trace_id=langfuse_trace_id,
+            name="initial name"
+        )
+
+        # update span, upserts on id => TODO: 生成了标签，但是没有数据
+        langfuse.span(
+            id=span.id,
+            name="updated name"
+        )
+
+        # create new nested span
+        langfuse.span( #TODO: 生成了标签，但是没有数据
+            trace_id=langfuse_trace_id,
+            parent_observation_id=span.id,
+            name="nested span"
+        )
+        # ------
         response = litellm.completion(
             model="gpt-3.5-turbo-1106",
             messages=messages,
