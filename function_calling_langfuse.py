@@ -8,6 +8,8 @@ litellm.success_callback = ['langfuse']
 litellm.failure_callback = ['langfuse']
 
 langfuse = Langfuse()
+langfuse_trace_id = "test-function_calling_langfuse"
+
 
 # https://litellm.vercel.app/docs/completion/function_call => TODO: 做成Emacs的助理Assistant，function calling本地的函数完成编辑，比如语音说一句，然后function calling调用Emacs函数编辑本地代码
 
@@ -54,8 +56,10 @@ def test_parallel_function_call():
         #span = trace.span(trace_id="test-funcall-tid")
         #litellm.generate(langfuseSpan= span) ## =>
         #litellm.generate(langfuseTrace= trace)
+
+        # ========== langfuse.trace 和 metadata 完全独立的，独立提交了空的数据进去，无语了。。。
         # ------- https://langfuse.com/docs/sdk/python/low-level-sdk => 能创建一颗树，但是没有数据在上面。。。都是空的
-        trace = langfuse.trace(name = "llm-feature")
+        trace = langfuse.trace(name = "llm-feature", trace_id = langfuse_trace_id)
         retrieval = trace.span(name = "retrieval")
         retrieval.generation(name = "query-creation")
         retrieval.span(name = "vector-db-search")
@@ -67,6 +71,7 @@ def test_parallel_function_call():
             messages=messages,
             tools=tools,
             tool_choice="auto",  # auto is default, but we'll be explicit
+            metadata={"trace_id": langfuse_trace_id}
         )
         print("\nFirst LLM Response:\n", response)
         response_message = response.choices[0].message
@@ -103,6 +108,7 @@ def test_parallel_function_call():
             second_response = litellm.completion(
                 model="gpt-3.5-turbo-1106",
                 messages=messages,
+                metadata={"trace_id": langfuse_trace_id}
             )  # get a new response from the model where it can see the function response
             print("\nSecond LLM response:\n", second_response)
             return second_response
