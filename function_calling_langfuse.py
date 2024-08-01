@@ -66,40 +66,61 @@ def test_parallel_function_call():
         #retrieval.event(name = "db-summary")
         #trace.generation(name = "user-output")
         # ----- 纯手工填入。llm的输入和输出都是填入到一个tid上面: input & output
-        trace = langfuse.trace(
-            name = "docs-retrieval",
-            #user_id = "user__935d7d1d-8625-4ef4-8651-544613e7bd22",
-            trace_id = langfuse_trace_id, #=> 无效
-            metadata = {
-                "email": "user@langfuse.com",
-                "trace_id": langfuse_trace_id #=> 无效
-            },
-            tags = ["production"]
-        )
-        # option 1: using trace object
-        trace.update(input="Hi there")
-        # option 2: via trace_id, trace is upserted on id
-        langfuse.trace(id=trace.id, output="Hi 👋")
-        print(f"==========={trace.get_trace_url()}")
-        # -----
-        # create span
-        span = langfuse.span( #TODO: 生成了标签，但是没有数据 ------ trace_id=langfuse_trace_id 是放到一块了。
-            trace_id=langfuse_trace_id,
-            name="initial name"
-        )
-
+        #trace = langfuse.trace(
+        #    name = "docs-retrieval",
+        #    #user_id = "user__935d7d1d-8625-4ef4-8651-544613e7bd22",
+        #    trace_id = langfuse_trace_id, #=> 无效
+        #    metadata = {
+        #        "email": "user@langfuse.com",
+        #        "trace_id": langfuse_trace_id #=> 无效
+        #    },
+        #    tags = ["production"]
+        #)
+        ## option 1: using trace object
+        #trace.update(input="Hi there")
+        ## option 2: via trace_id, trace is upserted on id
+        #langfuse.trace(id=trace.id, output="Hi 👋")
+        #print(f"==========={trace.get_trace_url()}")
+        ## create span
+        #span = langfuse.span( #TODO: 生成了标签，但是没有数据 ------ trace_id=langfuse_trace_id 是放到一块了。
+        #    trace_id=langfuse_trace_id,
+        #    name="initial name"
+        #)
         # update span, upserts on id => TODO: 生成了标签，但是没有数据
-        langfuse.span(
-            id=span.id,
-            name="updated name"
+        #langfuse.span(
+        #    id=span.id,
+        #    name="updated name"
+        #)
+        ## create new nested span
+        #langfuse.span( #TODO: 生成了标签，但是没有数据
+        #    trace_id=langfuse_trace_id,
+        #    parent_observation_id=span.id,
+        #    name="nested span"
+        #)
+        # ------ 完整的。但是span没有东西。
+        # creates generation
+        trace = langfuse.trace(name="function_calling_langfuse.py")
+        generation = trace.generation(
+            name="summary-generation",
+            trace_id=langfuse_trace_id,
+            model="gpt-3.5-turbo",
+            model_parameters={"maxTokens": "1000", "temperature": "0.9"},
+            input=[{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "Please generate a summary of the following documents \nThe engineering department defined the following OKR goals...\nThe marketing department defined the following OKR goals..."}],
+            metadata={"interface": "whatsapp"}
         )
 
-        # create new nested span
-        langfuse.span( #TODO: 生成了标签，但是没有数据
-            trace_id=langfuse_trace_id,
-            parent_observation_id=span.id,
-            name="nested span"
-        )
+        # execute model, mocked here
+        # chat_completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world"}])
+        chat_completion = {
+            "completion":"The Q3 OKRs contain goals for multiple teams...",
+            "usage":{"input": 50, "output": 49, "unit":"TOKENS"}
+        }
+
+        # update span and sets end_time
+        generation.end(
+            output=chat_completion["completion"],
+            usage=chat_completion["usage"],
+        );
         # ------
         response = litellm.completion(
             model="gpt-3.5-turbo-1106",
