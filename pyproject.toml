@@ -6,7 +6,7 @@ authors = ["stevechan <chanshunli@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11, <3.12"
 python-dotenv = "^1.0.1"
 flask-socketio = "^5.3.6"
 flask = "^3.0.3"
