@@ -4,8 +4,9 @@ import os
 
 from langfuse import Langfuse
 
-litellm.success_callback = ['langfuse']
-litellm.failure_callback = ['langfuse']
+## litellm.success_callback = ['langfuse']=> 这个是默认用metadata的体系，独立于用langfuse = Langfuse()的自己定义输入输出的体系 。关掉了callback还是有数据就是自己填充的数据
+#litellm.success_callback = ['langfuse']
+#litellm.failure_callback = ['langfuse']
 
 langfuse = Langfuse()
 langfuse_trace_id = "test-function_calling_langfuse"
