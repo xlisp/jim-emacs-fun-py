@@ -59,12 +59,27 @@ def test_parallel_function_call():
 
         # ========== langfuse.trace 和 metadata 完全独立的，独立提交了空的数据进去，无语了。。。
         # ------- https://langfuse.com/docs/sdk/python/low-level-sdk => 能创建一颗树，但是没有数据在上面。。。都是空的
-        trace = langfuse.trace(name = "llm-feature", trace_id = langfuse_trace_id)
-        retrieval = trace.span(name = "retrieval")
-        retrieval.generation(name = "query-creation")
-        retrieval.span(name = "vector-db-search")
-        retrieval.event(name = "db-summary")
-        trace.generation(name = "user-output")
+        #trace = langfuse.trace(name = "llm-feature", trace_id = langfuse_trace_id)
+        #retrieval = trace.span(name = "retrieval")
+        #retrieval.generation(name = "query-creation")
+        #retrieval.span(name = "vector-db-search")
+        #retrieval.event(name = "db-summary")
+        #trace.generation(name = "user-output")
+        # ----- 纯手工填入。llm的输入和输出都是填入到一个tid上面
+        trace = langfuse.trace(
+            name = "docs-retrieval",
+            user_id = "user__935d7d1d-8625-4ef4-8651-544613e7bd22",
+            metadata = {
+                "email": "user@langfuse.com",
+                "trace_id": langfuse_trace_id
+            },
+            tags = ["production"]
+        )
+        # option 1: using trace object
+        trace.update(input="Hi there")
+        # option 2: via trace_id, trace is upserted on id
+        langfuse.trace(id=trace.id, output="Hi 👋")
+        print(f"==========={trace.get_trace_url()}")
         # -----
         response = litellm.completion(
             model="gpt-3.5-turbo-1106",
