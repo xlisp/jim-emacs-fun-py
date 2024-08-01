@@ -65,13 +65,14 @@ def test_parallel_function_call():
         #retrieval.span(name = "vector-db-search")
         #retrieval.event(name = "db-summary")
         #trace.generation(name = "user-output")
-        # ----- 纯手工填入。llm的输入和输出都是填入到一个tid上面
+        # ----- 纯手工填入。llm的输入和输出都是填入到一个tid上面: input & output
         trace = langfuse.trace(
             name = "docs-retrieval",
-            user_id = "user__935d7d1d-8625-4ef4-8651-544613e7bd22",
+            #user_id = "user__935d7d1d-8625-4ef4-8651-544613e7bd22",
+            trace_id = langfuse_trace_id, #=> 无效
             metadata = {
                 "email": "user@langfuse.com",
-                "trace_id": langfuse_trace_id
+                "trace_id": langfuse_trace_id #=> 无效
             },
             tags = ["production"]
         )
