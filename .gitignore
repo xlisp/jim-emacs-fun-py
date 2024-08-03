@@ -4,3 +4,6 @@
 .ipynb_checkpoints/
 *.pdf
 *.gv
+.cache
+coding
+
