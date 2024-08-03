@@ -1,3 +1,5 @@
+# https://microsoft.github.io/autogen/docs/topics/non-openai-models/local-litellm-ollama/#example-with-function-calling
+
 from typing import Literal
 
 from typing_extensions import Annotated
@@ -7,8 +9,9 @@ import autogen
 local_llm_config = {
     "config_list": [
         {
-            "model": "NotRequired",  # Loaded with LiteLLM command
-            "api_key": "NotRequired",  # Not needed
+            "model": "ollama/llama3.1", #"NotRequired",  # Loaded with LiteLLM command
+            "api_key": "NULL",  # Not needed
+            "api_type": "open_ai",
             "base_url": "http://0.0.0.0:4000",  # Your LiteLLM URL
             "price": [0, 0],  # Put in price per 1K tokens [prompt, response] as free!
         }
@@ -70,7 +73,7 @@ res = user_proxy.initiate_chat(
     summary_method="reflection_with_llm",
 )
 
-# prunp autogen/autogen_litellm.py
+# $ prunp autogen/autogen_litellm_server.py
 # user_proxy (to chatbot):
 # 
 # How much is 123.45 EUR in USD?
@@ -78,9 +81,9 @@ res = user_proxy.initiate_chat(
 # --------------------------------------------------------------------------------
 # chatbot (to user_proxy):
 # 
-# ***** Suggested tool call (call_86077fc4-2cc0-4057-8152-5218a6f54b59): currency_calculator *****
+# ***** Suggested tool call (call_3411c581-1a8a-4db4-b8fd-1f5a65638541): currency_calculator *****
 # Arguments:
-# {"base_amount": "123.45", "base_currency": "EUR", "quote_currency": "USD"}
+# {"base_amount": 123.45, "base_currency": "EUR", "quote_currency": "USD"}
 # ************************************************************************************************
 # 
 # --------------------------------------------------------------------------------
@@ -90,7 +93,15 @@ res = user_proxy.initiate_chat(
 # 
 # user_proxy (to chatbot):
 # 
-# ***** Response from calling tool (call_86077fc4-2cc0-4057-8152-5218a6f54b59) *****
-# Error: can't multiply sequence by non-int of type 'float'
+# ***** Response from calling tool (call_3411c581-1a8a-4db4-b8fd-1f5a65638541) *****
+# 135.80 USD ### 回答对了，问了chatgpt客户端也是回答这么多 =》chatgpt背后生成了代码去计算了一遍： 123.45 EUR is approximately 135.80 USD based on an exchange rate of 1.10. Please note that exchange rates fluctuate and the actual rate might differ. ￼ 
 # **********************************************************************************
+# chatgpt客户端背后生成的代码：
+# Conversion of EUR to USD using a fixed exchange rate for demonstration purposes.
+# Normally, the exchange rate would be obtained from a financial API, but for now, I'll use a common exchange rate.
+#exchange_rate_eur_to_usd = 1.10  # This is an example rate and might not reflect the current rate.
+#amount_eur = 123.45
+#amount_usd = amount_eur * exchange_rate_eur_to_usd
+#amount_usd
+# --------------------------------------------------------------------------------
 # 
