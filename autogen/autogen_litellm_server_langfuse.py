@@ -67,7 +67,7 @@ def currency_calculator(
     quote_currency: Annotated[CurrencySymbol, "Quote currency"] = "EUR",
 ) -> str:
     quote_amount = exchange_rate(base_currency, quote_currency) * base_amount
-    langfuse.event("currency_conversion_completed")
+    #langfuse.event("currency_conversion_completed", 2.0)
     return f"{format(quote_amount, '.2f')} {quote_currency}"
 
 @observe()
@@ -77,10 +77,38 @@ def main():
         message="How much is 123.45 EUR in USD?",
         summary_method="reflection_with_llm",
     )
-    langfuse.score("conversation_completed", 1.0)
+    #langfuse.score("conversation_completed", 1.0) # => 打分这个先不要！TODO
     return res
 
 if __name__ == "__main__":
     main()
     langfuse.flush()
 
+# 
+# ## 跑langfuse正常了！！！
+# (emacspy) 坚持去λ化(中-易) jim-emacs-fun-py  master @ prunp autogen/autogen_litellm_server_langfuse.py
+# user_proxy (to chatbot):
+# 
+# How much is 123.45 EUR in USD?
+# 
+# --------------------------------------------------------------------------------
+# chatbot (to user_proxy):
+# 
+# ***** Suggested tool call (call_069fbe1e-dd9e-4453-8c57-2876ea0d1ba6): currency_calculator *****
+# Arguments:
+# {"base_amount": 123.45, "base_currency": "EUR", "quote_currency": "USD"}
+# ************************************************************************************************
+# 
+# --------------------------------------------------------------------------------
+# 
+# >>>>>>>> EXECUTING FUNCTION currency_calculator...
+# user_proxy (to chatbot):
+# 
+# user_proxy (to chatbot):
+# 
+# ***** Response from calling tool (call_069fbe1e-dd9e-4453-8c57-2876ea0d1ba6) *****
+# 135.80 USD
+# **********************************************************************************
+# 
+# --------------------------------------------------------------------------------
+# 
