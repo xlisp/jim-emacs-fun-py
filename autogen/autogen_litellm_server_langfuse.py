@@ -4,7 +4,9 @@ from typing import Literal
 from typing_extensions import Annotated
 import autogen
 from langfuse import Langfuse
-from langfuse.decorators import trace
+#from langfuse.decorators import trace
+#https://langfuse.com/docs/sdk/python/decorators
+from langfuse.decorators import observe
 import os 
 
 # Langfuse initialization
@@ -58,7 +60,7 @@ def exchange_rate(base_currency: CurrencySymbol, quote_currency: CurrencySymbol)
 
 @user_proxy.register_for_execution()
 @chatbot.register_for_llm(description="Currency exchange calculator.")
-@trace
+@observe()
 def currency_calculator(
     base_amount: Annotated[float, "Amount of currency in base_currency"],
     base_currency: Annotated[CurrencySymbol, "Base currency"] = "USD",
@@ -68,7 +70,7 @@ def currency_calculator(
     langfuse.event("currency_conversion_completed")
     return f"{format(quote_amount, '.2f')} {quote_currency}"
 
-@trace
+@observe()
 def main():
     res = user_proxy.initiate_chat(
         chatbot,
