@@ -1,11 +1,10 @@
 # https://microsoft.github.io/autogen/docs/topics/non-openai-models/local-litellm-ollama/#example-with-function-calling
-
 from typing import Literal
 from typing_extensions import Annotated
 import autogen
 from langfuse import Langfuse
 
-# from langfuse.decorators import trace
+# from langfuse.decorators import trace # 老的接口，cl生成。=> 替换为新的@observe
 # https://langfuse.com/docs/sdk/python/decorators
 from langfuse.decorators import observe, langfuse_context
 import os
@@ -62,6 +61,7 @@ def exchange_rate(
         return 1.1
     else:
         raise ValueError(f"Unknown currencies {base_currency}, {quote_currency}")
+
 
 ## 这里加上了span了：SPAN currency_calculator
 @user_proxy.register_for_execution()
