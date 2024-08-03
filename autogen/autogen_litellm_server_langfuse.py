@@ -1,4 +1,6 @@
 # https://microsoft.github.io/autogen/docs/topics/non-openai-models/local-litellm-ollama/#example-with-function-calling
+# USE: prunp autogen/autogen_litellm_server_langfuse.py "How much is 923.45 EUR in USD?"
+
 from typing import Literal
 from typing_extensions import Annotated
 import autogen
@@ -8,6 +10,7 @@ from langfuse import Langfuse
 # https://langfuse.com/docs/sdk/python/decorators
 from langfuse.decorators import observe, langfuse_context
 import os
+import sys
 
 # Langfuse initialization
 langfuse = Langfuse(
@@ -83,10 +86,10 @@ def currency_calculator(
 
 
 @observe()
-def main():
+def main(question):
     res = user_proxy.initiate_chat(
         chatbot,
-        message="How much is 123.45 EUR in USD?",
+        message=question,
         summary_method="reflection_with_llm",
     )
     # langfuse.score("conversation_completed", 1.0) # => 打分这个先不要！TODO
@@ -99,7 +102,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1])  # "How much is 123.45 EUR in USD?"
     langfuse.flush()
 
 #
