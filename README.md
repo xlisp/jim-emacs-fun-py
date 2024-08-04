@@ -282,7 +282,8 @@ for va in vaAAs:
 ```
 ## filter
 ```py
-filter(lambda x: x>0, [2, -5, 9, -7, 2, 5, 4, -1, 0, -3, 8]) #=> [2, 9, 2, 5, 4, 8]
+filter(lambda x: x>0, [2, -5, 9, -7, 2, 5, 4, -1, 0, -3, 8]) #=> <filter at 0x11d1b6860>
+list(...) #=> [2, 9, 2, 5, 4, 8]
 # => or 方法必须要return布尔值, py的lambda替换为def函数要return
 def myfn(x, y):
     if x > 0:
@@ -290,7 +291,7 @@ def myfn(x, y):
     else:
         return False
 
-filter(lambda x: myfn(x, 222), [2, -5, 9, -7, 2, 5, 4, -1, 0, -3, 8]) #=> [2, 9, 2, 5, 4, 8]
+list(filter(lambda x: myfn(x, 222), [2, -5, 9, -7, 2, 5, 4, -1, 0, -3, 8])) #=> [2, 9, 2, 5, 4, 8]
 ```
 ## yield
 ```py
