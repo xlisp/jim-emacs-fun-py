@@ -85,31 +85,31 @@ user_proxy.initiate_chat(coder, message=task)
 ## ----------- 跑起来了，效果不错👍 -------------- 谷歌搜索 autogen 使用ollama ！
 # (emacspy) 坚持去λ化(中-易) jim-emacs-fun-py  master @ prunp autogen/autogen_chat_codellama_py.py
 # user_proxy (to Coder):
-# 
-# 
+#
+#
 # Write a python script to output numbers 1 to 100 and then the user_proxy agent should run the script
-# 
-# 
+#
+#
 # --------------------------------------------------------------------------------
 # Coder (to user_proxy):
-# 
+#
 # ```
 # filename: countdown.py
 # #!/usr/bin/env python3
-# 
+#
 # count = 100 # set count to 100
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
-# 
+#
 # --------------------------------------------------------------------------------
-# 
+#
 # >>>>>>>> EXECUTING CODE BLOCK 0 (inferred language is python)...
 # user_proxy (to Coder):
-# 
+#
 # exitcode: 1 (execution failed)
 # Code output:
 # Traceback (most recent call last):
@@ -117,41 +117,41 @@ user_proxy.initiate_chat(coder, message=task)
 #     filename: countdown.py
 #               ^^^^^^^^^
 # NameError: name 'countdown' is not defined
-# 
-# 
+#
+#
 # --------------------------------------------------------------------------------
 # Coder (to user_proxy):
-# 
+#
 #  The error indicates that the `filename` parameter is undefined. This is because the value of the `filename` variable is not passed to the script correctly. Here are possible solutions:
 # * Use a different parameter name, such as `file_name`, instead of `filename`.
 # * Ensure that the correct file path and name are specified in the `filename` parameter when executing the script.
 # * Make sure the file exists and is accessible by the user running the script.
-# 
+#
 # --------------------------------------------------------------------------------
-# 
+#
 # [autogen.oai.client: 08-03 09:44:22] {329} WARNING - Model llama3.1 is not found. The cost will be 0. In your config_list, add field {"price" : [prompt_price_per_1k, completion_token_price_per_1k]} for customized pricing.
 # user_proxy (to Coder):
-# 
+#
 # In this case, none of those solutions apply because we don't need to pass a specific filename as an argument to the script. The error message can be ignored.
-# 
+#
 # To fix the issue, we simply remove the line that sets `filename`:
-# 
+#
 # ```
 # # countdown.py
 # count = 100 # set count to 100
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
-# 
+#
 # The script will then execute without any issues.
-# 
+#
 # --------------------------------------------------------------------------------
 # [autogen.oai.client: 08-03 09:44:36] {329} WARNING - Model codellama is not found. The cost will be 0. In your config_list, add field {"price" : [prompt_price_per_1k, completion_token_price_per_1k]} for customized pricing.
 # Coder (to user_proxy):
-# 
+#
 #  We suggest you remove the line that sets `filename`:
 # ```
 # # countdown.py
@@ -159,124 +159,23 @@ user_proxy.initiate_chat(coder, message=task)
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
 # The script will then execute without any issues.
-# 
+#
 # --------------------------------------------------------------------------------
-# 
+#
 # >>>>>>>> EXECUTING CODE BLOCK 0 (inferred language is python)...
 # user_proxy (to Coder):
-# 
+#
 # exitcode: 0 (execution succeeded)
 # Code output:
-# 100
-# 99
-# 98
-# 97
-# 96
-# 95
-# 94
-# 93
-# 92
-# 91
-# 90
-# 89
-# 88
-# 87
-# 86
-# 85
-# 84
-# 83
-# 82
-# 81
-# 80
-# 79
-# 78
-# 77
-# 76
-# 75
-# 74
-# 73
-# 72
-# 71
-# 70
-# 69
-# 68
-# 67
-# 66
-# 65
-# 64
-# 63
-# 62
-# 61
-# 60
-# 59
-# 58
-# 57
-# 56
-# 55
-# 54
-# 53
-# 52
-# 51
-# 50
-# 49
-# 48
-# 47
-# 46
-# 45
-# 44
-# 43
-# 42
-# 41
-# 40
-# 39
-# 38
-# 37
-# 36
-# 35
-# 34
-# 33
-# 32
-# 31
-# 30
-# 29
-# 28
-# 27
-# 26
-# 25
-# 24
-# 23
-# 22
-# 21
-# 20
-# 19
-# 18
-# 17
-# 16
-# 15
-# 14
-# 13
-# 12
-# 11
-# 10
-# 9
-# 8
-# 7
-# 6
-# 5
-# 4
-# 3
-# 2
-# 1
-# 
-# 
+# 100# 99# 98# 97# 96# 95# 94# 93# 92# 91# 90# 89# 88# 87# 86# 85# 84# 83# 82# 81# 80# 79# 78# 77# 76# 75# 74# 73# 72# 71# 70# 69# 68# 67# 66# 65# 64# 63# 62# 61# 60# 59# 58# 57# 56# 55# 54# 53# 52# 51# 50# 49# 48# 47# 46# 45# 44# 43# 42# 41# 40# 39# 38# 37# 36# 35# 34# 33# 32# 31# 30# 29# 28# 27# 26# 25# 24# 23# 22# 21# 20# 19# 18# 17# 16# 15# 14# 13# 12# 11# 10# 9# 8# 7# 6# 5# 4# 3# 2# 1# #
 # --------------------------------------------------------------------------------
 # [autogen.oai.client: 08-03 09:44:44] {329} WARNING - Model codellama is not found. The cost will be 0. In your config_list, add field {"price" : [prompt_price_per_1k, completion_token_price_per_1k]} for customized pricing.
 # Coder (to user_proxy):
-# 
+#
 #  We suggest you remove the line that sets `filename`:
 # ```
 # # countdown.py
@@ -284,124 +183,24 @@ user_proxy.initiate_chat(coder, message=task)
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
 # The script will then execute without any issues and output numbers 1 to 100.
-# 
+#
 # --------------------------------------------------------------------------------
-# 
+#
 # >>>>>>>> EXECUTING CODE BLOCK 0 (inferred language is python)...
 # user_proxy (to Coder):
-# 
+#
 # exitcode: 0 (execution succeeded)
 # Code output:
-# 100
-# 99
-# 98
-# 97
-# 96
-# 95
-# 94
-# 93
-# 92
-# 91
-# 90
-# 89
-# 88
-# 87
-# 86
-# 85
-# 84
-# 83
-# 82
-# 81
-# 80
-# 79
-# 78
-# 77
-# 76
-# 75
-# 74
-# 73
-# 72
-# 71
-# 70
-# 69
-# 68
-# 67
-# 66
-# 65
-# 64
-# 63
-# 62
-# 61
-# 60
-# 59
-# 58
-# 57
-# 56
-# 55
-# 54
-# 53
-# 52
-# 51
-# 50
-# 49
-# 48
-# 47
-# 46
-# 45
-# 44
-# 43
-# 42
-# 41
-# 40
-# 39
-# 38
-# 37
-# 36
-# 35
-# 34
-# 33
-# 32
-# 31
-# 30
-# 29
-# 28
-# 27
-# 26
-# 25
-# 24
-# 23
-# 22
-# 21
-# 20
-# 19
-# 18
-# 17
-# 16
-# 15
-# 14
-# 13
-# 12
-# 11
-# 10
-# 9
-# 8
-# 7
-# 6
-# 5
-# 4
-# 3
-# 2
-# 1
-# 
-# 
+# 100# 99# 98# 97# 96# 95# 94# 93# 92# 91# 90# 89# 88# 87# 86# 85# 84# 83# 82# 81# 80# 79# 78# 77# 76# 75# 74# 73# 72# 71# 70# 69# 68# 67# 66# 65# 64# 63# 62# 61# 60# 59# 58# 57# 56# 55# 54# 53# 52# 51# 50# 49# 48# 47# 46# 45# 44# 43# 42# 41# 40# 39# 38# 37# 36# 35# 34# 33# 32# 31# 30# 29# 28# 27# 26# 25# 24# 23# 22# 21# 20# 19# 18# 17# 16# 15# 14# 13# 12# 11# 10# 9# 8# 7# 6# 5# 4# 3# 2# 1#
+#
 # --------------------------------------------------------------------------------
 # [autogen.oai.client: 08-03 09:44:52] {329} WARNING - Model codellama is not found. The cost will be 0. In your config_list, add field {"price" : [prompt_price_per_1k, completion_token_price_per_1k]} for customized pricing.
 # Coder (to user_proxy):
-# 
+#
 #  We suggest you remove the line that sets `filename`:
 # ```
 # # countdown.py
@@ -409,124 +208,24 @@ user_proxy.initiate_chat(coder, message=task)
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
 # The script will then execute without any issues and output numbers 1 to 100.
-# 
+#
 # --------------------------------------------------------------------------------
-# 
+#
 # >>>>>>>> EXECUTING CODE BLOCK 0 (inferred language is python)...
 # user_proxy (to Coder):
-# 
+#
 # exitcode: 0 (execution succeeded)
 # Code output:
-# 100
-# 99
-# 98
-# 97
-# 96
-# 95
-# 94
-# 93
-# 92
-# 91
-# 90
-# 89
-# 88
-# 87
-# 86
-# 85
-# 84
-# 83
-# 82
-# 81
-# 80
-# 79
-# 78
-# 77
-# 76
-# 75
-# 74
-# 73
-# 72
-# 71
-# 70
-# 69
-# 68
-# 67
-# 66
-# 65
-# 64
-# 63
-# 62
-# 61
-# 60
-# 59
-# 58
-# 57
-# 56
-# 55
-# 54
-# 53
-# 52
-# 51
-# 50
-# 49
-# 48
-# 47
-# 46
-# 45
-# 44
-# 43
-# 42
-# 41
-# 40
-# 39
-# 38
-# 37
-# 36
-# 35
-# 34
-# 33
-# 32
-# 31
-# 30
-# 29
-# 28
-# 27
-# 26
-# 25
-# 24
-# 23
-# 22
-# 21
-# 20
-# 19
-# 18
-# 17
-# 16
-# 15
-# 14
-# 13
-# 12
-# 11
-# 10
-# 9
-# 8
-# 7
-# 6
-# 5
-# 4
-# 3
-# 2
-# 1
-# 
-# 
+# 100# 99# 98# 97# 96# 95# 94# 93# 92# 91# 90# 89# 88# 87# 86# 85# 84# 83# 82# 81# 80# 79# 78# 77# 76# 75# 74# 73# 72# 71# 70# 69# 68# 67# 66# 65# 64# 63# 62# 61# 60# 59# 58# 57# 56# 55# 54# 53# 52# 51# 50# 49# 48# 47# 46# 45# 44# 43# 42# 41# 40# 39# 38# 37# 36# 35# 34# 33# 32# 31# 30# 29# 28# 27# 26# 25# 24# 23# 22# 21# 20# 19# 18# 17# 16# 15# 14# 13# 12# 11# 10# 9# 8# 7# 6# 5# 4# 3# 2# 1#
+#
 # --------------------------------------------------------------------------------
 # [autogen.oai.client: 08-03 09:45:07] {329} WARNING - Model codellama is not found. The cost will be 0. In your config_list, add field {"price" : [prompt_price_per_1k, completion_token_price_per_1k]} for customized pricing.
 # Coder (to user_proxy):
-# 
+#
 #  We suggest you remove the line that sets `filename`:
 # ```
 # # countdown.py
@@ -534,124 +233,24 @@ user_proxy.initiate_chat(coder, message=task)
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
 # The script will then execute without any issues and output numbers 1 to 100.
-# 
+#
 # --------------------------------------------------------------------------------
-# 
+#
 # >>>>>>>> EXECUTING CODE BLOCK 0 (inferred language is python)...
 # user_proxy (to Coder):
-# 
+#
 # exitcode: 0 (execution succeeded)
 # Code output:
-# 100
-# 99
-# 98
-# 97
-# 96
-# 95
-# 94
-# 93
-# 92
-# 91
-# 90
-# 89
-# 88
-# 87
-# 86
-# 85
-# 84
-# 83
-# 82
-# 81
-# 80
-# 79
-# 78
-# 77
-# 76
-# 75
-# 74
-# 73
-# 72
-# 71
-# 70
-# 69
-# 68
-# 67
-# 66
-# 65
-# 64
-# 63
-# 62
-# 61
-# 60
-# 59
-# 58
-# 57
-# 56
-# 55
-# 54
-# 53
-# 52
-# 51
-# 50
-# 49
-# 48
-# 47
-# 46
-# 45
-# 44
-# 43
-# 42
-# 41
-# 40
-# 39
-# 38
-# 37
-# 36
-# 35
-# 34
-# 33
-# 32
-# 31
-# 30
-# 29
-# 28
-# 27
-# 26
-# 25
-# 24
-# 23
-# 22
-# 21
-# 20
-# 19
-# 18
-# 17
-# 16
-# 15
-# 14
-# 13
-# 12
-# 11
-# 10
-# 9
-# 8
-# 7
-# 6
-# 5
-# 4
-# 3
-# 2
-# 1
-# 
-# 
+# 100# 99# 98# 97# 96# 95# 94# 93# 92# 91# 90# 89# 88# 87# 86# 85# 84# 83# 82# 81# 80# 79# 78# 77# 76# 75# 74# 73# 72# 71# 70# 69# 68# 67# 66# 65# 64# 63# 62# 61# 60# 59# 58# 57# 56# 55# 54# 53# 52# 51# 50# 49# 48# 47# 46# 45# 44# 43# 42# 41# 40# 39# 38# 37# 36# 35# 34# 33# 32# 31# 30# 29# 28# 27# 26# 25# 24# 23# 22# 21# 20# 19# 18# 17# 16# 15# 14# 13# 12# 11# 10# 9# 8# 7# 6# 5# 4# 3# 2# 1#
+#
 # --------------------------------------------------------------------------------
 # [autogen.oai.client: 08-03 09:45:24] {329} WARNING - Model codellama is not found. The cost will be 0. In your config_list, add field {"price" : [prompt_price_per_1k, completion_token_price_per_1k]} for customized pricing.
 # Coder (to user_proxy):
-# 
+#
 #  We suggest you remove the line that sets `filename`:
 # ```
 # # countdown.py
@@ -659,124 +258,24 @@ user_proxy.initiate_chat(coder, message=task)
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
 # The script will then execute without any issues and output numbers 1 to 100
-# 
+#
 # --------------------------------------------------------------------------------
-# 
+#
 # >>>>>>>> EXECUTING CODE BLOCK 0 (inferred language is python)...
 # user_proxy (to Coder):
-# 
+#
 # exitcode: 0 (execution succeeded)
 # Code output:
-# 100
-# 99
-# 98
-# 97
-# 96
-# 95
-# 94
-# 93
-# 92
-# 91
-# 90
-# 89
-# 88
-# 87
-# 86
-# 85
-# 84
-# 83
-# 82
-# 81
-# 80
-# 79
-# 78
-# 77
-# 76
-# 75
-# 74
-# 73
-# 72
-# 71
-# 70
-# 69
-# 68
-# 67
-# 66
-# 65
-# 64
-# 63
-# 62
-# 61
-# 60
-# 59
-# 58
-# 57
-# 56
-# 55
-# 54
-# 53
-# 52
-# 51
-# 50
-# 49
-# 48
-# 47
-# 46
-# 45
-# 44
-# 43
-# 42
-# 41
-# 40
-# 39
-# 38
-# 37
-# 36
-# 35
-# 34
-# 33
-# 32
-# 31
-# 30
-# 29
-# 28
-# 27
-# 26
-# 25
-# 24
-# 23
-# 22
-# 21
-# 20
-# 19
-# 18
-# 17
-# 16
-# 15
-# 14
-# 13
-# 12
-# 11
-# 10
-# 9
-# 8
-# 7
-# 6
-# 5
-# 4
-# 3
-# 2
-# 1
-# 
-# 
+# 100# 99# 98# 97# 96# 95# 94# 93# 92# 91# 90# 89# 88# 87# 86# 85# 84# 83# 82# 81# 80# 79# 78# 77# 76# 75# 74# 73# 72# 71# 70# 69# 68# 67# 66# 65# 64# 63# 62# 61# 60# 59# 58# 57# 56# 55# 54# 53# 52# 51# 50# 49# 48# 47# 46# 45# 44# 43# 42# 41# 40# 39# 38# 37# 36# 35# 34# 33# 32# 31# 30# 29# 28# 27# 26# 25# 24# 23# 22# 21# 20# 19# 18# 17# 16# 15# 14# 13# 12# 11# 10# 9# 8# 7# 6# 5# 4# 3# 2# 1#
+#
 # --------------------------------------------------------------------------------
 # [autogen.oai.client: 08-03 09:45:33] {329} WARNING - Model codellama is not found. The cost will be 0. In your config_list, add field {"price" : [prompt_price_per_1k, completion_token_price_per_1k]} for customized pricing.
 # Coder (to user_proxy):
-# 
+#
 #  We suggest you remove the line that sets `filename`:
 # ```
 # # countdown.py
@@ -784,124 +283,23 @@ user_proxy.initiate_chat(coder, message=task)
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
 # The script will then execute without any issues and output numbers 1 to 100.
-# 
+#
 # --------------------------------------------------------------------------------
-# 
+#
 # >>>>>>>> EXECUTING CODE BLOCK 0 (inferred language is python)...
 # user_proxy (to Coder):
-# 
+#
 # exitcode: 0 (execution succeeded)
 # Code output:
-# 100
-# 99
-# 98
-# 97
-# 96
-# 95
-# 94
-# 93
-# 92
-# 91
-# 90
-# 89
-# 88
-# 87
-# 86
-# 85
-# 84
-# 83
-# 82
-# 81
-# 80
-# 79
-# 78
-# 77
-# 76
-# 75
-# 74
-# 73
-# 72
-# 71
-# 70
-# 69
-# 68
-# 67
-# 66
-# 65
-# 64
-# 63
-# 62
-# 61
-# 60
-# 59
-# 58
-# 57
-# 56
-# 55
-# 54
-# 53
-# 52
-# 51
-# 50
-# 49
-# 48
-# 47
-# 46
-# 45
-# 44
-# 43
-# 42
-# 41
-# 40
-# 39
-# 38
-# 37
-# 36
-# 35
-# 34
-# 33
-# 32
-# 31
-# 30
-# 29
-# 28
-# 27
-# 26
-# 25
-# 24
-# 23
-# 22
-# 21
-# 20
-# 19
-# 18
-# 17
-# 16
-# 15
-# 14
-# 13
-# 12
-# 11
-# 10
-# 9
-# 8
-# 7
-# 6
-# 5
-# 4
-# 3
-# 2
-# 1
-# 
-# 
+# 100# 99# 98# 97# 96# 95# 94# 93# 92# 91# 90# 89# 88# 87# 86# 85# 84# 83# 82# 81# 80# 79# 78# 77# 76# 75# 74# 73# 72# 71# 70# 69# 68# 67# 66# 65# 64# 63# 62# 61# 60# 59# 58# 57# 56# 55# 54# 53# 52# 51# 50# 49# 48# 47# 46# 45# 44# 43# 42# 41# 40# 39# 38# 37# 36# 35# 34# 33# 32# 31# 30# 29# 28# 27# 26# 25# 24# 23# 22# 21# 20# 19# 18# 17# 16# 15# 14# 13# 12# 11# 10# 9# 8# 7# 6# 5# 4# 3# 2# 1##
 # --------------------------------------------------------------------------------
 # [autogen.oai.client: 08-03 09:45:44] {329} WARNING - Model codellama is not found. The cost will be 0. In your config_list, add field {"price" : [prompt_price_per_1k, completion_token_price_per_1k]} for customized pricing.
 # Coder (to user_proxy):
-# 
+#
 #  We suggest you remove the line that sets `filename`:
 # ```
 # # countdown.py
@@ -909,124 +307,23 @@ user_proxy.initiate_chat(coder, message=task)
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
 # The script will then execute without any issues and output numbers 1 to 100.
-# 
+#
 # --------------------------------------------------------------------------------
-# 
+#
 # >>>>>>>> EXECUTING CODE BLOCK 0 (inferred language is python)...
 # user_proxy (to Coder):
-# 
+#
 # exitcode: 0 (execution succeeded)
 # Code output:
-# 100
-# 99
-# 98
-# 97
-# 96
-# 95
-# 94
-# 93
-# 92
-# 91
-# 90
-# 89
-# 88
-# 87
-# 86
-# 85
-# 84
-# 83
-# 82
-# 81
-# 80
-# 79
-# 78
-# 77
-# 76
-# 75
-# 74
-# 73
-# 72
-# 71
-# 70
-# 69
-# 68
-# 67
-# 66
-# 65
-# 64
-# 63
-# 62
-# 61
-# 60
-# 59
-# 58
-# 57
-# 56
-# 55
-# 54
-# 53
-# 52
-# 51
-# 50
-# 49
-# 48
-# 47
-# 46
-# 45
-# 44
-# 43
-# 42
-# 41
-# 40
-# 39
-# 38
-# 37
-# 36
-# 35
-# 34
-# 33
-# 32
-# 31
-# 30
-# 29
-# 28
-# 27
-# 26
-# 25
-# 24
-# 23
-# 22
-# 21
-# 20
-# 19
-# 18
-# 17
-# 16
-# 15
-# 14
-# 13
-# 12
-# 11
-# 10
-# 9
-# 8
-# 7
-# 6
-# 5
-# 4
-# 3
-# 2
-# 1
-# 
-# 
+# 100# 99# 98# 97# 96# 95# 94# 93# 92# 91# 90# 89# 88# 87# 86# 85# 84# 83# 82# 81# 80# 79# 78# 77# 76# 75# 74# 73# 72# 71# 70# 69# 68# 67# 66# 65# 64# 63# 62# 61# 60# 59# 58# 57# 56# 55# 54# 53# 52# 51# 50# 49# 48# 47# 46# 45# 44# 43# 42# 41# 40# 39# 38# 37# 36# 35# 34# 33# 32# 31# 30# 29# 28# 27# 26# 25# 24# 23# 22# 21# 20# 19# 18# 17# 16# 15# 14# 13# 12# 11# 10# 9# 8# 7# 6# 5# 4# 3# 2# 1##
 # --------------------------------------------------------------------------------
 # [autogen.oai.client: 08-03 09:45:58] {329} WARNING - Model codellama is not found. The cost will be 0. In your config_list, add field {"price" : [prompt_price_per_1k, completion_token_price_per_1k]} for customized pricing.
 # Coder (to user_proxy):
-# 
+#
 #  We suggest you remove the line that sets `filename`:
 # ```
 # # countdown.py
@@ -1034,124 +331,24 @@ user_proxy.initiate_chat(coder, message=task)
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
 # The script will then execute without any issues and output numbers 1 to 100
-# 
+#
 # --------------------------------------------------------------------------------
-# 
+#
 # >>>>>>>> EXECUTING CODE BLOCK 0 (inferred language is python)...
 # user_proxy (to Coder):
-# 
+#
 # exitcode: 0 (execution succeeded)
 # Code output:
-# 100
-# 99
-# 98
-# 97
-# 96
-# 95
-# 94
-# 93
-# 92
-# 91
-# 90
-# 89
-# 88
-# 87
-# 86
-# 85
-# 84
-# 83
-# 82
-# 81
-# 80
-# 79
-# 78
-# 77
-# 76
-# 75
-# 74
-# 73
-# 72
-# 71
-# 70
-# 69
-# 68
-# 67
-# 66
-# 65
-# 64
-# 63
-# 62
-# 61
-# 60
-# 59
-# 58
-# 57
-# 56
-# 55
-# 54
-# 53
-# 52
-# 51
-# 50
-# 49
-# 48
-# 47
-# 46
-# 45
-# 44
-# 43
-# 42
-# 41
-# 40
-# 39
-# 38
-# 37
-# 36
-# 35
-# 34
-# 33
-# 32
-# 31
-# 30
-# 29
-# 28
-# 27
-# 26
-# 25
-# 24
-# 23
-# 22
-# 21
-# 20
-# 19
-# 18
-# 17
-# 16
-# 15
-# 14
-# 13
-# 12
-# 11
-# 10
-# 9
-# 8
-# 7
-# 6
-# 5
-# 4
-# 3
-# 2
-# 1
-# 
-# 
+# 100# 99# 98# 97# 96# 95# 94# 93# 92# 91# 90# 89# 88# 87# 86# 85# 84# 83# 82# 81# 80# 79# 78# 77# 76# 75# 74# 73# 72# 71# 70# 69# 68# 67# 66# 65# 64# 63# 62# 61# 60# 59# 58# 57# 56# 55# 54# 53# 52# 51# 50# 49# 48# 47# 46# 45# 44# 43# 42# 41# 40# 39# 38# 37# 36# 35# 34# 33# 32# 31# 30# 29# 28# 27# 26# 25# 24# 23# 22# 21# 20# 19# 18# 17# 16# 15# 14# 13# 12# 11# 10# 9# 8# 7# 6# 5# 4# 3# 2# 1#
+#
 # --------------------------------------------------------------------------------
 # [autogen.oai.client: 08-03 09:46:12] {329} WARNING - Model codellama is not found. The cost will be 0. In your config_list, add field {"price" : [prompt_price_per_1k, completion_token_price_per_1k]} for customized pricing.
 # Coder (to user_proxy):
-# 
+#
 #  We suggest you remove the line that sets `filename`:
 # ```
 # # countdown.py
@@ -1159,11 +356,11 @@ user_proxy.initiate_chat(coder, message=task)
 # while count > 0: # while loop counts from 100 to 1
 #    print(count); # print the count variable
 #    count -= 1; # decrements the counter by one
-# 
+#
 # # User Proxy code will go here!
 # ```
 # The script will then execute without any issues and output numbers 1 to 100.
-# 
+#
 # --------------------------------------------------------------------------------
 # (emacspy) 坚持去λ化(中-易) jim-emacs-fun-py  master @
-# 
+#
