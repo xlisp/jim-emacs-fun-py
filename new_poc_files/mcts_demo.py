@@ -97,3 +97,13 @@ if __name__ == '__main__':
     print(f'Best node value: {best_node.value}')
     print(f'Root visits: {root.visits}')
     print(f'Root value: {root.value}')
+
+#Best action: 0
+#Best node visits: 100
+#Best node value: 100
+#Root visits: 1000
+#Root value: 1000
+
+## https://blog.csdn.net/DeepViewInsight/article/details/132959033
+# 蒙特卡洛树搜索，通常简称为MCTS，是一种用于决策制定的算法。 它在众多领域中都有广泛应用，包括人工智能、博弈论和自动规划等。 MCTS的主要优势之一是它可以在没有先验知识的情况下，有效地搜索大规模的决策空间，因此被广泛应用于复杂的游戏和规划问题中。
+
