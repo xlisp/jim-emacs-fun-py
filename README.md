@@ -704,3 +704,26 @@ async def main():
     await process_file(file_path)
 
 ```
+
+## await util asyncio.wait_for
+
+```python
+
+#  await util 7 second, timeout 7 seconds
+def you_state_is_inactive(you_state):
+    return status != 'ACTIVE'
+
+async def check_you_state_is_inactive(you_state):
+    try:
+        await asyncio.wait_for(_check_you_state_loop(you_state), timeout=7)
+    except asyncio.TimeoutError as e:
+        raise Exception("you_state status is not ACTIVE") from e
+
+async def _check_you_state_loop(you_state):
+    while True:
+        if you_state_is_inactive(you_state):
+            break
+        # Sleep for 1 second before checking again
+        await asyncio.sleep(1)
+
+```
