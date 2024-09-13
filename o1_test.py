@@ -13,7 +13,7 @@ response = requests.post(
     "X-Title": "clacky"
   },
   data=json.dumps({
-    "model": "openai/o1-mini", # Optional
+    "model": "openai/o1-preview", #"openai/o1-mini", # Optional
     "messages": [
       { "role": "user", "content": question }
     ]
