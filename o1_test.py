@@ -3,7 +3,8 @@
 import requests
 import json
 import os
-
+# "Use python pyautogen lib  to write a code agent: need multiple roles: generate code, generate tests and run tests, code summary" 
+question = "Use python pyautogen lib  how to write ReAct?"
 response = requests.post(
   url="https://openrouter.ai/api/v1/chat/completions",
   headers={
@@ -14,7 +15,7 @@ response = requests.post(
   data=json.dumps({
     "model": "openai/o1-mini", # Optional
     "messages": [
-      { "role": "user", "content": "Use pyautogen lib (https://github.com/microsoft/autogen) to write a code agent with multiple roles: generate code, generate tests and run tests, code summary" }
+      { "role": "user", "content": question }
     ]
 
   })
