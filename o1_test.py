@@ -3,8 +3,11 @@
 import requests
 import json
 import os
-# "Use python pyautogen lib  to write a code agent: need multiple roles: generate code, generate tests and run tests, code summary" 
-question = "Use python pyautogen lib  how to write ReAct?"
+
+question = "Use pyautogen lib (https://github.com/microsoft/autogen) to write A Coder agents with multiple roles: generate code, generate tests and run code tests, code summary role"
+
+#question = "Use python pyautogen lib  how to write ReAct?"
+
 response = requests.post(
   url="https://openrouter.ai/api/v1/chat/completions",
   headers={
