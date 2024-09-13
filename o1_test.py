@@ -31,6 +31,3 @@ if response.status_code == 200:
 else:
     print(json.dumps({"error": f"Error: {response.status_code}", "message": response.text}, indent=2))
 
-## ===>> erro:
-# requests.exceptions.ProxyError: HTTPSConnectionPool(host='openrouter.ai', port=443): Max retries exceeded with url: /api/v1/chat/completions (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))
-
