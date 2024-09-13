@@ -14,7 +14,7 @@ response = requests.post(
   data=json.dumps({
     "model": "openai/o1-mini", # Optional
     "messages": [
-      { "role": "user", "content": "What is the meaning of life?" }
+      { "role": "user", "content": "Use pyautogen lib (https://github.com/microsoft/autogen) to write a code agent with multiple roles: generate code, generate tests and run tests, code summary" }
     ]
 
   })
@@ -25,6 +25,8 @@ response = requests.post(
 # Output the JSON response in a format compatible with jq.
 if response.status_code == 200:
     print(json.dumps(response.json(), indent=2))  # Use `json.dumps` to ensure valid JSON output
+    print("========================\n")
+    print(response.json()['choices'][0]['message']['content'])
 else:
     print(json.dumps({"error": f"Error: {response.status_code}", "message": response.text}, indent=2))
 
