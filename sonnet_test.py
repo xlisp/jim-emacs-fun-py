@@ -6,23 +6,26 @@ import os
 
 question = "Use pyautogen lib (https://github.com/microsoft/autogen) to write A Coder agents with multiple roles: generate code, generate tests and run code tests, code summary role"
 
-#question = "Use python pyautogen lib  how to write ReAct?"
+OPENROUTER_API_KEY = os.environ['OPENROUTER_API_KEY']
 
 response = requests.post(
   url="https://openrouter.ai/api/v1/chat/completions",
   headers={
-    "Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}"
+    "Authorization": f"Bearer {OPENROUTER_API_KEY}"
   },
   data=json.dumps({
-    "model": "openai/o1-preview", #"openai/o1-mini", # Optional
+    "model": "anthropic/claude-3.5-sonnet", # Optional
     "messages": [
-      { "role": "user", "content": question }
-    ]
-
+      {"role": "user", "content": question}
+    ],
+    "top_p": 1,
+    "temperature": 1,
+    "frequency_penalty": 0,
+    "presence_penalty": 0,
+    "repetition_penalty": 1,
+    "top_k": 0,
   })
 )
-#print(f"{response.json()}")
-##print(response.json())
 
 # Output the JSON response in a format compatible with jq.
 if response.status_code == 200:
