@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Executor</title>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.5.0/dist/socket.io.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            resize: none;
+        }
+        #result {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            height: 200px;
+            overflow-y: scroll;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Command Executor</h1>
+        <textarea id="commandInput" placeholder="Enter your command here..."></textarea>
+        <button id="executeBtn" onclick="sendCommand()">Execute Command</button>
+        <h2>Result:</h2>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Initialize the connection to the Flask-SocketIO server
+        var socket = io.connect('http://0.0.0.0:5001');
+
+        // Function to send the command to the server
+        function sendCommand() {
+            var command = document.getElementById('commandInput').value;
+            if (command) {
+                document.getElementById('executeBtn').disabled = true;
+                document.getElementById('result').textContent = "Executing...";
+                socket.send(command);  // Send the command to the server
+            }
+        }
+
+        // Listen for messages (results) from the server
+        socket.on('message', function(msg) {
+            document.getElementById('result').textContent = msg;
+            document.getElementById('executeBtn').disabled = false;
+        });
+
+        // Error handling
+        socket.on('connect_error', function() {
+            document.getElementById('result').textContent = "Connection error!";
+        });
+    </script>
+</body>
+</html>
+
