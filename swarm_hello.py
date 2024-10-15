@@ -24,3 +24,8 @@ response = client.run(
 
 print(response.messages[-1]["content"])
 
+# @ prunp swarm_hello.py
+# Agent B is here now.
+# Drifting in like a gentle
+# Breeze; how can I help?
+
