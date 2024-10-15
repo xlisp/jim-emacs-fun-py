@@ -24,7 +24,7 @@ llama-parse = "^0.4.9"
 llama-index-tools-google = "^0.1.6"
 llama-index-tools-yahoo-finance = "^0.1.1"
 pyautogen = "^0.2.33"
-swarm = "^0.0.2"
+swarm = { git = "https://github.com/openai/swarm", rev = "main" }
 
 [tool.poetry.group.dev.dependencies]
 langfuse = "^2.36.1"
