@@ -1,5 +1,6 @@
 import ast
 import difflib
+import sys
 from typing import Dict, List, Optional, Tuple
 
 class FunctionComparator:
@@ -93,27 +94,36 @@ class FunctionComparator:
 
         return results
 
-# Example usage
-if __name__ == "__main__":
-    code1 = """
-def add_numbers(a, b):
-    return a + b
+def read_file(filepath: str) -> str:
+    """Read and return the contents of a file."""
+    try:
+        with open(filepath, 'r') as file:
+            return file.read()
+    except Exception as e:
+        print(f"Error reading file {filepath}: {str(e)}")
+        sys.exit(1)
 
-def multiply(x, y):
-    return x * y
-"""
+def main():
+    # Check if correct number of arguments are provided
+    if len(sys.argv) != 3:
+        print("Usage: python script.py <file1.py> <file2.py>")
+        sys.exit(1)
 
-    code2 = """
-def add_numbers(a, b, c):
-    return a + b + c
+    # Get file paths from command line arguments
+    file1_path = sys.argv[1]
+    file2_path = sys.argv[2]
 
-def multiply(x, y):
-    result = x * y
-    return result
-"""
+    # Read the contents of both files
+    code1 = read_file(file1_path)
+    code2 = read_file(file2_path)
 
+    # Compare the codes
     comparator = FunctionComparator()
     results = comparator.compare_codes(code1, code2)
+    
+    # Print results
+    print(f"\nComparing functions between {file1_path} and {file2_path}:")
+    print("-" * 50)
     
     for func_name, result in results.items():
         print(f"\nFunction: {func_name}")
@@ -123,18 +133,72 @@ def multiply(x, y):
             for diff in result['differences']:
                 print(f"  - {diff}")
 
+if __name__ == "__main__":
+    main()
 
-## ---- run ----
-# @ python diff_funcs.py
+## run --------
+#  @ python diff_funcs_file.py /Users/clojure/Desktop/ai-automatic-env-build/poc_web_autogen.py /Users/clojure/Desktop/ai-automatic-env-build/poc_python_au
+# togen.py
 # 
-# Function: add_numbers
+# Comparing functions between /Users/clojure/Desktop/ai-automatic-env-build/poc_web_autogen.py and /Users/clojure/Desktop/ai-automatic-env-build/poc_python_autogen.py:
+# --------------------------------------------------
+# 
+# Function: write_files
+# Status: missing_in_code2
+# 
+# Function: generate_project
+# Status: missing_in_code1
+# 
+# Function: setup_project_structure
+# Status: missing_in_code2
+# 
+# Function: extract_code_blocks
+# Status: missing_in_code2
+# 
+# Function: get_llm_response
+# Status: identical
+# 
+# Function: setup_testing_environment
+# Status: missing_in_code2
+# 
+# Function: suggest_file_names
+# Status: missing_in_code1
+# 
+# Function: write_code_to_file
+# Status: missing_in_code1
+# 
+# Function: create_project
 # Status: different
 # Differences:
-#   - Different arguments: ['a', 'b'] vs ['a', 'b', 'c']
-#   - Different operation types: ['binop:Add'] vs ['binop:Add', 'binop:Add']
+#   - Different operation types: ['call:print', 'call:print', 'call:print', 'call:print', 'call:print', 'call:print', 'call:print', 'call:print'] vs ['call:print', 'call:print', 'call:print', 'call:print', 'call:print', 'call:print']
 # 
-# Function: multiply
+# Function: parse_arguments
+# Status: identical
+# 
+# Function: run_tests
 # Status: different
 # Differences:
-#   - Different number of statements: 1 vs 2
+#   - Different arguments: ['self'] vs ['self', 'test_file']
+# 
+# Function: validate_python_code
+# Status: missing_in_code1
+# 
+# Function: read_requirements
+# Status: identical
+# 
+# Function: extract_code_from_response
+# Status: missing_in_code1
+# 
+# Function: __init__
+# Status: different
+# Differences:
+#   - Different operation types: ['call:WebProject'] vs ['call:CodeProject']
+# 
+# Function: generate_web_component
+# Status: missing_in_code2
+# 
+# Function: main
+# Status: different
+# Differences:
+#   - Different operation types: ['call:WebProjectManager', 'call:parse_arguments', 'call:print', 'call:read_requirements'] vs ['call:ProjectManager', 'call:parse_arguments', 'call:print', 'call:read_requirements']
 # 
