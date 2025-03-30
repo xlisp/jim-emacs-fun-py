@@ -1,0 +1,12 @@
+{
+    "model": "gpt-4",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer YOUR_API_KEY",
+        "User-Agent": "Python/3.9"
+    },
+    "metadata": {
+        "generated_at": "2025-03-30",
+        "version": "1.0"
+    }
+}
